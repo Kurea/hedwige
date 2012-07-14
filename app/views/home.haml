@@ -30,7 +30,8 @@
               %img{:src => 'http://placehold.it/640x480'}
 
             #text.span6
-              <%= text %>
+              <% var converter = new Showdown.converter() %>
+              <%= converter.makeHtml(text) %>
 
           #navigation-buttons.row
             .span12

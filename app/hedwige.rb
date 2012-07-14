@@ -43,11 +43,12 @@ class Hedwige < Sinatra::Base
     ]
 
     js :main, [
-    	'/js/jquery.js',
-    	'/js/underscore.js',
-    	'/js/backbone.js',
-    	'/js/bootstrap.js',
-      '/js/base_app.js'
+    	'/js/vendor/jquery.js',
+    	'/js/vendor/underscore.js',
+    	'/js/vendor/backbone.js',
+    	'/js/vendor/bootstrap.js',
+      '/js/vendor/showdown/src/showdown.js',
+      '/js/hedwige.js'
     ]
 
     js_compression  :jsmin      # Optional
