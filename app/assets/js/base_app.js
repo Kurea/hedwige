@@ -1,80 +1,58 @@
 $(function() {
 	
-	var Bookmark = Backbone.Model.extend({
-		clear: function() {
-			this.destroy();
+	window.Stage = Backbone.Model.extend({
+		urlRoot: '/stages',
+
+		initialize: function() {
+			this.fetch();
 		}
 	});
 	
-	var Bookmailist = Backbone.Collection.extend({
-		model: Bookmark,
-		url: '/bookmarks'
-	});
-	
-	var Bookmarks = new Bookmailist;
-	
-	var BookmarkView = Backbone.View.extend({
+	window.StageView = Backbone.View.extend({
 		
-		tagName: 	"li",
+		tagName: 	'div',
 
-		template: "<a href='<%= url %>'><%= title %></a><span class='delete symbol'>u</span>",
+		template: _.template($('#template-stage').html()),
 
 		events: {
-			"click .delete" : "delete",
 		},
 		
 		initialize: function() {
-      this.model.bind('destroy', this.remove, this);
+      //this.model.bind('destroy', this.remove, this);
     },
 
 		render: function() {
-			$(this.el).html(_.template(this.template, this.model.attributes));
+			this.$el.html(this.template(this.model.toJSON()));
 	    return this;
-    },
-
-		delete: function() {
-			console.log("delete");
-		}
+    }
 	});
 	
 	var AppView = Backbone.View.extend({
 		
-		el: $("#bookmailist-app"),
+		el: $("#app"),
 		
 		events: {
 		},
 		
 		initialize: function() {
-			Bookmarks.bind('add', 	this.addOne, this);
-			Bookmarks.bind('reset', this.addAll, this);
-			Bookmarks.bind('all', 	this.render, this);
-			Bookmarks.fetch();
+			/*Stages.bind('add', 	this.addOne, this);
+			Stages.bind('reset', this.addAll, this);
+			Stages.bind('all', 	this.render, this);*/
+			//Stages.fetch();
+			this.fetchStage(1);
 		},
 		
-		render: function() {
+		fetchStage: function(id) {
+			this.stage = new Stage({id: id});
+			this.stage.bind('change', this.renderStage, this);
 		},
-		
-		addOne: function(bookmark) {
-			var view = new BookmarkView({model: bookmark});
-			var el = view.render().el;
-			this.$("#bookmailist").append(el);
-		},
-		
-		addAll: function() {
-			Bookmarks.each(this.addOne);
-		},
-		
-		saveBookmark: function() {
-			Bookmarks.create({components: getRgbaComponentsDecimal()});
-		},
-		
-		clearBookmarks: function() {
-			$(Bookmarks.models).each(function(bookmark) {
-				this.clear();
-			});
+
+		renderStage: function() {
+			var view = new StageView({model: this.stage});
+			this.$('#stage').append(view.render().el);
 		}
 		
 	});
 	
-	var App = new AppView;
+	window.App = new AppView;
 });

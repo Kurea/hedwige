@@ -1,4 +1,4 @@
-class BaseAppModel
+class HedwigeModel
   include Mongoid::Document
   include Mongoid::Timestamps
 

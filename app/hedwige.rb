@@ -1,4 +1,4 @@
-class BaseApp < Sinatra::Base
+class Hedwige < Sinatra::Base
   
   set :root, File.dirname(__FILE__)
   enable    :logging, :dump_errors, :raise_errors
@@ -14,6 +14,10 @@ class BaseApp < Sinatra::Base
     haml :home
   end
   
+  get '/stages/1' do
+    content_type :json
+    File.open('data/stage1.json').read
+  end
 
   ##
   # Assets (through AssetPack)
@@ -22,7 +26,7 @@ class BaseApp < Sinatra::Base
   assets {
     serve '/js',     from: 'assets/js'
     serve '/css',    from: 'assets/css'
-    serve '/images', from: 'assets/img'
+    serve '/img',    from: 'assets/img'
 
     # The second parameter defines where the compressed version will be served.
     # (Note: that parameter is optional, AssetPack will figure it out.)
@@ -33,8 +37,9 @@ class BaseApp < Sinatra::Base
 
     css :main, [
       '/css/bootstrap.css',
+      '/css/hedwige-base.css',
       '/css/bootstrap-responsive.css',
-      '/css/base_app.css'
+      '/css/hedwige.css'
     ]
 
     js :main, [

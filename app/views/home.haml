@@ -2,11 +2,59 @@
 %html
 
   %head
-    %title= "BaseApp"
+    %title= "Hedwige"
     != css :main
 
   %body
     
-    %h1 This is your BaseApp's home.
+    .navbar.navbar-fixed-top
+      .navbar-inner
+        .container
+          %a.brand{:href => '#'} Hedwige
+
+    #app
+      #stage
+
+    #templates{:style => 'display: none;'}
+
+      %script#template-stage{:type => "text/template"}
+        #stage.container
+
+          #title.row
+            .span12
+              %h1 <%= title %>
+
+          #content.row
+
+            #picture.span6
+              %img{:src => 'http://placehold.it/640x480'}
+
+            #text.span6
+              <%= text %>
+
+          #navigation-buttons.row
+            .span12
+              .btn-toolbar
+                .btn.btn-large.pull-left
+                  %i.icon-hand-left
+                  = "Étape précédente"
+                .btn.btn-large.btn-primary.pull-right
+                  %i.icon-hand-right.icon-white
+                  = "Étape suivante"
+
+          #frequent-questions.row
+            .span12
+              %h2= "Questions fréquentes"
+
+          .row
+            .span6
+              %ul.nav.nav-list
+                <% _.each(faqs, function(faq) { %>
+                %li
+                  %a{:href => '#'} <%= faq.question %>
+                <% }) %>
+                      
+            .span6
+              La réponse à la question fréquente sélectionnée.
 
     != js :main
