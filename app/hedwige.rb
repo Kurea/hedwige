@@ -1,8 +1,12 @@
 class Hedwige < Sinatra::Base
   
   set :root, File.dirname(__FILE__)
+  set :haml, :escape_attrs => false
+
   enable    :logging, :dump_errors, :raise_errors
   helpers   Sinatra::Partials
+  
+  # Plugins
   register  Sinatra::AssetPack
   register  Sinatra::FontAssets
 

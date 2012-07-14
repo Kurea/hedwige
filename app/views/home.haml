@@ -12,50 +12,51 @@
         .container
           %a.brand{:href => '#'} Hedwige
 
-    #app
+    #app.container
       #stage
 
-    #templates{:style => 'display: none;'}
 
-      %script#template-stage{:type => "text/template"}
-        #stage.container
+    / templates
 
-          #title.row
-            .span12
-              %h1 <%= title %>
+    %script#template-stage{:type => "text/template"}
+      #title.row
+        .span12
+          %h1 <%= title %>
 
-          #content.row
+      #content.row
 
-            #picture.span6
-              %img{:src => 'http://placehold.it/640x480'}
+        #picture.span6
+          %img{:src => 'http://placehold.it/640x480'}
 
-            #text.span6
-              <% var converter = new Showdown.converter() %>
-              <%= converter.makeHtml(text) %>
+        #text.span6
+          <% var converter = new Showdown.converter() %>
+          <%= converter.makeHtml(text) %>
 
-          #navigation-buttons.row
-            .span12
-              .btn-toolbar
-                .btn.btn-large.pull-left
-                  %i.icon-hand-left
-                  = "Étape précédente"
-                .btn.btn-large.btn-primary.pull-right
-                  %i.icon-hand-right.icon-white
-                  = "Étape suivante"
+      #navigation-buttons.row
+        .span12
+          .btn-toolbar
+            .btn.btn-large.pull-left
+              %i.icon-hand-left
+              = "Étape précédente"
+            .btn.btn-large.btn-primary.pull-right
+              %i.icon-hand-right.icon-white
+              = "Étape suivante"
 
-          #frequent-questions.row
-            .span12
-              %h2= "Questions fréquentes"
+      #faqs
 
-          .row
-            .span6
-              %ul.nav.nav-list
-                <% _.each(faqs, function(faq) { %>
-                %li
-                  %a{:href => '#'} <%= faq.question %>
-                <% }) %>
-                      
-            .span6
-              La réponse à la question fréquente sélectionnée.
+    %script#template-faqs{:type => "text/template"}
+      .row
+        .span12
+          %h2= "Questions fréquentes"
+
+      .row
+        .span6
+          %ul.nav.nav-list
+            <% _.each(faqs, function(faq, index) { %>
+            %li
+              %a{:href => '#', :'data-index' => '<%= index %>'} <%= faq.question %>
+            <% }) %>
+                  
+        #faq-answer.span6
 
     != js :main
