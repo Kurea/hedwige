@@ -11,7 +11,6 @@ $(function() {
   window.StageView = Backbone.View.extend({
     
     el: $('#stage'),
-
     template: _.template($('#template-stage').html()),
 
     events: {
@@ -28,6 +27,12 @@ $(function() {
     render: function() {
       this.$el.html(this.template(this.model.toJSON()));
       this.$el.find('#faqs').replaceWith(this.faqsView.render().el);
+
+      // Show/hide buttons
+      var prevButton = this.$el.find('#button-previous');
+      var nextButton = this.$el.find('#button-next');
+      this.model.attributes.prev != undefined ? prevButton.show() : prevButton.hide();
+      this.model.attributes.next != undefined ? nextButton.show() : nextButton.hide();
       return this;
     }
   });
@@ -60,10 +65,12 @@ $(function() {
     el: $("#app"),
     
     events: {
+      "click #button-previous": "gotoPreviousStage",
+      "click #button-next":     "gotoNextStage"
     },
     
     initialize: function() {
-      this.fetchStage(1);
+      this.fetchStage('accueil');
     },
     
     fetchStage: function(id) {
@@ -73,8 +80,23 @@ $(function() {
 
     renderStage: function() {
       var view = new StageView({model: this.stage});
-      window.stageView = view;
       view.render();
+    },
+
+    gotoPreviousStage: function(event) {
+      var prevId;
+      if ((prevId = this.stage.attributes.prev) != undefined) {
+        this.fetchStage(prevId);
+      }
+      return false;
+    },
+
+    gotoNextStage: function(event) {
+      var nextId;
+      if ((nextId = this.stage.attributes.next) != undefined) {
+        this.fetchStage(nextId);
+      }
+      return false;
     }
     
   });

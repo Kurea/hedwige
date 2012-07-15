@@ -18,9 +18,9 @@ class Hedwige < Sinatra::Base
     haml :home
   end
   
-  get '/stages/1' do
+  get '/stages/:id' do
     content_type :json
-    File.open('data/stage1.json').read
+    File.open("data/#{params[:id]}.json").read
   end
 
   ##

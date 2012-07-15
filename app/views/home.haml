@@ -28,17 +28,32 @@
         #picture.span6
           %img{:src => 'http://placehold.it/640x480'}
 
-        #text.span6
-          <% var converter = new Showdown.converter() %>
-          <%= converter.makeHtml(text) %>
+        #content.span6
+          #text
+            <% var converter = new Showdown.converter() %>
+            <%= converter.makeHtml(text) %>
+          <% if (typeof(forms) != "undefined") { %>
+          %form.form-horizontal
+            %fieldsets
+              .control-group
+                %label.control-label
+                  <%= forms[0].label %>
+                .controls
+                  <% if (forms[0].type == "radio") { %>
+                  <% _.each(forms[0].choices, function(choice) { %>
+                  %label.radio
+                    %input{:type => 'radio', :name => '<%= forms[0].id %>', :id => '<%= choice %>'} <%= choice %>
+                  <% }) %>
+                  <% } %>
+          <% } %>
 
-      #navigation-buttons.row
+      .row
         .span12
           .btn-toolbar
-            .btn.btn-large.pull-left
+            #button-previous.btn.btn-large.pull-left
               %i.icon-hand-left
               = "Étape précédente"
-            .btn.btn-large.btn-primary.pull-right
+            #button-next.btn.btn-large.btn-primary.pull-right
               %i.icon-hand-right.icon-white
               = "Étape suivante"
 
@@ -58,5 +73,7 @@
             <% }) %>
                   
         #faq-answer.span6
+
+    %script
 
     != js :main
