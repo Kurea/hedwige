@@ -1,7 +1,7 @@
 $(function() {
   
   window.Stage = Backbone.Model.extend({
-    urlRoot: '/stages',
+    urlRoot: '/data/stages',
 
     initialize: function() {
       this.fetch();
@@ -60,6 +60,28 @@ $(function() {
 
   });
   
+  var AppRouter = Backbone.Router.extend({
+
+    routes: {
+      "":      "showStage",
+      ":id":   "showStage"
+    },
+
+    initialize: function(options) {
+      this.appView = options.appView;
+      _.bindAll(this, 'showStage');
+    },
+
+    showStage: function(id) {
+      if (id == undefined) {
+        // root page
+        id = "accueil";
+      }
+      this.appView.loadStage(id);
+    }
+
+  });
+
   var AppView = Backbone.View.extend({
     
     el: $("#app"),
@@ -70,10 +92,11 @@ $(function() {
     },
     
     initialize: function() {
-      this.fetchStage('accueil');
+      this.router = new AppRouter({appView: this});
+      Backbone.history.start({pushState: true});
     },
     
-    fetchStage: function(id) {
+    loadStage: function(id) {
       this.stage = new Stage({id: id});
       this.stage.bind('change', this.renderStage, this);
     },
@@ -81,12 +104,13 @@ $(function() {
     renderStage: function() {
       var view = new StageView({model: this.stage});
       view.render();
+      this.router.navigate(this.stage.id);
     },
 
     gotoPreviousStage: function(event) {
       var prevId;
       if ((prevId = this.stage.attributes.prev) != undefined) {
-        this.fetchStage(prevId);
+        this.loadStage(prevId);
       }
       return false;
     },
@@ -94,7 +118,7 @@ $(function() {
     gotoNextStage: function(event) {
       var nextId;
       if ((nextId = this.stage.attributes.next) != undefined) {
-        this.fetchStage(nextId);
+        this.loadStage(nextId);
       }
       return false;
     }

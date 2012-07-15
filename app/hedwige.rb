@@ -11,22 +11,8 @@ class Hedwige < Sinatra::Base
   register  Sinatra::FontAssets
 
   ##
-  # Home page
-  #
-
-  get '/' do
-    haml :home
-  end
-  
-  get '/stages/:id' do
-    content_type :json
-    File.open("data/#{params[:id]}.json").read
-  end
-
-  ##
   # Assets (through AssetPack)
   #
-
   assets {
     serve '/js',     from: 'assets/js'
     serve '/css',    from: 'assets/css'
@@ -58,4 +44,19 @@ class Hedwige < Sinatra::Base
     js_compression  :jsmin      # Optional
     css_compression :simple     # Optional
   }
+
+  ##
+  # App routes
+  #
+
+  # JSON data
+  get '/data/stages/:id' do
+    content_type :json
+    File.open("data/#{params[:id]}.json").read
+  end
+
+  # All other URLs
+  get '/*' do
+    haml :home
+  end
 end
