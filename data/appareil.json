@@ -1,0 +1,20 @@
+{
+  "id": "appareil",
+  "prev": "accueil",
+  "title": "Votre appareil",
+  "text": "Pour commencer nous allons nous assurer que votre appareil est bien compatible avec les livres numériques protégés par des DRM. Pour ce faire, nous vous remercions de répondre aux quelques questions suivantes:",
+  "forms": [
+    {
+      "id": "typeAppareil",
+      "type": "radio",
+      "label": "Vos appareil est-il :",
+      "choices": ["une tablette", "une liseuse", "un smartphone"]
+    }
+  ],
+  "faqs": [
+    {
+      "question": "Quelle est la différence entre une tablette, une liseuse et un smartphone ?",
+      "answer": "Une tablette est un appareil permettant la lecture de contenus multimédia comme des livres numériques, des vidéos ou de la musique mais aussi la lecture d'emails ou de contenus internet.\nUne liseuse, aussi appelée livre électronique ou eReader, est un appareil destiné principalement à la lecture de livres. Les liseuses utilisent de l'encre électronique qui leur donne une apparence de papier recyclé. Elles ne permettent pas une lecture sans source lumineuse extérieure.\nUn smartphone est un téléphone permettant également la lecture de contenus multimédias ou internet.)"
+    }
+  ]
+}
