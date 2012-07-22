@@ -1,6 +1,22 @@
 {
   "id": "appareil",
   "prev": "accueil",
+  "next": [
+    {
+      "id": "osLiseuse",
+      "conditions": {
+        "predicates": [
+          {
+            "id": "typeAppareil",
+            "value": "une liseuse"
+          }
+        ]
+      }
+    },
+    {
+      "id": "osTablette"
+    }
+  ],
   "title": "Votre appareil",
   "text": "Pour commencer nous allons nous assurer que votre appareil est bien compatible avec les livres numériques protégés par des DRM. Pour ce faire, nous vous remercions de répondre aux quelques questions suivantes:",
   "forms": [
@@ -8,7 +24,17 @@
       "id": "typeAppareil",
       "type": "radio",
       "label": "Vos appareil est-il :",
-      "choices": ["une tablette", "une liseuse", "un smartphone"]
+      "choices": [ {
+          "id": "tablette",
+          "text": "une tablette",
+        }, {
+          "id": "liseuse",
+          "text": "une liseuse",
+        }, {
+          "id": "smartphone",
+          "text": "un smartphone",
+        }
+      ]
     }
   ],
   "faqs": [
