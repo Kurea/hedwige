@@ -1,0 +1,39 @@
+#title.row
+  .span12
+    %h1 <%= title %>
+
+#content.row
+
+  #picture.span6
+    %img{:src => 'http://placehold.it/640x480'}
+
+  #content.span6
+    #text
+      <% var converter = new Showdown.converter() %>
+      <%= converter.makeHtml(text) %>
+    <% if (typeof(forms) != "undefined") { %>
+    %form.form-horizontal
+      %fieldsets
+        .control-group
+          %label.control-label
+            <%= forms[0].label %>
+          .controls
+            <% if (forms[0].type == "radio") { %>
+            <% _.each(forms[0].choices, function(choice) { %>
+            %label.radio
+              %input{:type => 'radio', :name => '<%= forms[0].id %>', :id => '<%= choice.id %>'} <%= choice.text %>
+            <% }) %>
+            <% } %>
+    <% } %>
+
+.row
+  .span12
+    .btn-toolbar
+      #button-previous.btn.btn-large.pull-left
+        %i.icon-hand-left
+        = "Étape précédente"
+      #button-next.btn.btn-large.btn-primary.pull-right
+        %i.icon-hand-right.icon-white
+        = "Étape suivante"
+
+#faqs

@@ -26,13 +26,13 @@
       "label": "Vos appareil est-il :",
       "choices": [ {
           "id": "tablette",
-          "text": "une tablette",
+          "text": "une tablette"
         }, {
           "id": "liseuse",
-          "text": "une liseuse",
+          "text": "une liseuse"
         }, {
           "id": "smartphone",
-          "text": "un smartphone",
+          "text": "un smartphone"
         }
       ]
     }

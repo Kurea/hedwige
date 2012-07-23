@@ -1,9 +1,9 @@
 GIT
   remote: git@github.com:rchampourlier/guard-shotgun.git
-  revision: 368baa8368655db8ac2be1b9fa69a7803e62d28b
+  revision: ad95122e1ef0f121e8d150e2e6f93ecf43797993
   branch: master
   specs:
-    guard-shotgun (0.0.4)
+    guard-shotgun (0.0.5)
       ffi
       guard
       spoon
@@ -103,6 +103,7 @@ PLATFORMS
 DEPENDENCIES
   activesupport
   bson_ext
+  bundler
   guard
   guard-rspec
   guard-shotgun!

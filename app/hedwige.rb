@@ -9,6 +9,7 @@ class Hedwige < Sinatra::Base
   # Plugins
   register  Sinatra::AssetPack
   register  Sinatra::FontAssets
+  register  Sinatra::JstHamlAssets
 
   ##
   # Assets (through AssetPack)
@@ -33,11 +34,7 @@ class Hedwige < Sinatra::Base
     ]
 
     js :main, [
-    	'/js/vendor/jquery.js',
-    	'/js/vendor/underscore.js',
-    	'/js/vendor/backbone.js',
-    	'/js/vendor/bootstrap.js',
-      '/js/vendor/showdown/src/showdown.js',
+      '/js/vendor/require.min.js',
       '/js/hedwige.js'
     ]
 

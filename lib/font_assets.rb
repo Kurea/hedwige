@@ -1,8 +1,8 @@
+# Source: https://github.com/colszowka/rack-fontserve/blob/master/lib/rack-fontserve.rb
+
 require 'sinatra/base'
 
 module Sinatra
-
-  # Source: https://github.com/colszowka/rack-fontserve/blob/master/lib/rack-fontserve.rb
   module FontAssets
 
     CONTENT_TYPES = {

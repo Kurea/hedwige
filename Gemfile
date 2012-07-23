@@ -1,5 +1,7 @@
 source "http://rubygems.org"
 
+gem 'bundler'
+
 gem 'sinatra', :require => "sinatra/base"
 gem 'thin'
 
