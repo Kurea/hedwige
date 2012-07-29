@@ -1,0 +1,6 @@
+{
+  "identifier": "erreur",
+  "prev": "accueil",
+  "title": "Toutes nos excuses",
+  "text": "Il semble que votre appareil ne soit pas compatible avec la lecture de fichiers ePub protégés par des DRM. \n\nVous pouvez effectuer la vérification manuellement. Pour ce faire, dans la notice s'utilisation de votre appareil disponible le plus souvent dans la boite de votre appareil, dans votre appareil ou sur le site internet du fabriquant, rechercher des mentions de :\n\n- Adobe Digital Edition\n- Adobe DRM\n- ou ce logo :\n\nUne liste des appareils compatible est également disponible sur le site d'Adobe : [cliquez ici pour y accéder](http://blogs.adobe.com/digitalpublishing/supported-devices).\n\nSi votre appareil permet d'installer des applications complémentaire, vous pouvez rechercher une application de lecture compatible avec les fichiers ePub protégés par des DRM Adobe.\n\nSi vous ne trouvez pas l'un de ces éléments il est très probable que votre appareil ne soit pas compatible avec les DRM et que vous ne puissiez donc pas lire les livres numériques protégés.\n\nSi vous estimez que votre appareil est compatible, [cliquez ici](osOrdi)."
+}

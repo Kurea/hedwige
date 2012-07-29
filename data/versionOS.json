@@ -1,0 +1,17 @@
+{
+  "identifier": "versionOS",
+  "prev": "osOrdi",
+  "title": "Votre OS",
+  "text": "...",
+  "faqs": [
+    {
+      "question": "?",
+      "answer": "..."
+    },
+    {
+      "question": "?",
+      "answer": "..."
+    }
+
+  ]
+}

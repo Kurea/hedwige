@@ -1,0 +1,74 @@
+{
+  "identifier": "osOrdi",
+  "prev": "appareil",
+  "next": [
+    {
+      "identifier": "erreur",
+      "conditions": {
+        "predicates": [
+          {
+            "identifier": "osOrdi",
+            "value": "noOrdi"
+          },
+          {
+            "identifier": "typeAppareil",
+            "value": "liseuse"
+          }
+        ]
+      }
+    },
+    {
+      "identifier": "appliLecture",
+      "conditions": {
+        "predicates": [
+          {
+            "identifier": "osOrdi",
+            "value": "noOrdi"
+          }
+        ]
+      }
+    },
+    {
+      "identifier": "versionOS"
+    }
+  ],
+  "title": "Parlons de votre ordinateur",
+  "text": "Afin de vous proposer les explications les plus précises possibles, nous aurions besoin de connaître le système d'exploitation de votre ordinateur",
+  "forms": [
+    {
+      "identifier": "osOrdi",
+      "type": "radio",
+      "label": "Votre ordinateur urilise :",
+      "choices": [ {
+          "identifier": "winVista",
+          "text": "Microsoft Windows Vista ou 7 ? (?)"
+        }, {
+          "identifier": "winXP",
+          "text": "une autre version de Microsoft Windows ? (?)"
+        }, {
+          "identifier": "MacIntel",
+          "text": "Mac OS X 10.5 ou supérieur (Leopard, Snow Leopard, Lion, Mountain Lion) ? (?)"
+        }, {
+          "identifier": "MacPPC",
+          "text": "une version de Mac OS X antérieure ? (?)"
+        }, {
+          "identifier": "linux",
+          "text": "Linux (Ubuntu, SUSE, Debian…) ? (?)"
+        }, {
+          "identifier": "noOrdi",
+          "text": "Je n'ai pas d'ordinateur"
+        }
+      ]
+    }
+  ],
+  "faqs": [
+    {
+      "question": "Comment savoir dans quelle catégorie entre mon appareil ?",
+      "answer": "En cliquant sur le (?) situé à côté de chaque réponse, vous verrez apparaitre une image qui vous aidera à savoir quel est le système d'exploitation de votre appareil"
+    },
+    {
+      "question": "Pourquoi désirez-vous connaître cette information ?",
+      "answer": "Connaître le système d'exploitation de votre appareil nous permet de vous proposer une explication personnalisée pour votre appareil."
+    }
+  ]
+}

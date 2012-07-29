@@ -1,0 +1,37 @@
+{
+  "identifier": "compatLiseuse",
+  "prev": "osLiseuse",
+  "next": [
+    {
+      "identifier": "erreur",
+      "conditions": {
+        "predicates": [
+          {
+            "identifier": "compatible",
+            "value": "ko"
+          }
+        ]
+      }
+    },
+    {
+      "identifier": "osOrdi"
+    }
+  ],
+  "title": "Parlons de votre appareil",
+  "text": "Vous avez indiqué que votre liseuse est d'une autre marque.\n\nNous vous invitons à vérifier qu'elle dispose bien de la fonctionnalité de lecture des fichiers ePub protégés par des DRM. Pour ce faire, dans la notice s'utilisation de votre liseuse disponible le plus souvent dans la boite de votre liseuse, dans votre liseuse ou sur le site internet du fabriquant, rechercher des mentions de :\n\n- Adobe Digital Edition\n- Adobe DRM\n- ou ce logo :\n\nUne liste des liseuses compatible est également disponible sur le site d'Adobe : [cliquez ici pour y accéder](http://blogs.adobe.com/digitalpublishing/supported-devices).\n\nSi vous ne trouvez pas l'un de ces éléments il est très probable que votre liseuse ne soit pas compatible avec les DRM et que vous ne puissiez donc pas lire les livres numériques protégés.",
+  "forms": [
+    {
+      "identifier": "compatible",
+      "type": "radio",
+      "label": "Votre appareil est-il compatible ?",
+      "choices": [ {
+          "identifier": "ok",
+          "text": "Oui, je pense que mon appareil est compatible"
+        }, {
+          "identifier": "ko",
+          "text": "Non, je pense que mon appareil n'est pas compatible"
+        }
+      ]
+    }
+  ]
+}

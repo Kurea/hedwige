@@ -1,0 +1,43 @@
+{
+  "identifier": "modeTuto",
+  "prev": "osTablette",
+  "next": [
+    {
+      "identifier": "appliLecture",
+      "conditions": {
+        "predicates": [
+          {
+            "identifier": "modeTuto",
+            "value": "tablette"
+          }
+        ]
+      }
+    },
+    {
+      "identifier": "osOrdi"
+    }
+  ],
+  "title": "Parlons de votre appareil",
+  "text": "Votre appareil permet d'accéder à internet. Nous pouvons donc vous proposer deux modes d'accès différents aux livres numériques protégés :\n\n- via votre ordinateur\n- directement via votre <%= typAppareil %>",
+  "forms": [
+    {
+      "identifier": "modeTuto",
+      "type": "radio",
+      "label": "Veillez choisir le mode d'accès qui vous correspond le mieux :",
+      "choices": [ {
+          "identifier": "ordi",
+          "text": "via mon ordinateur"
+        }, {
+          "identifier": "tablette",
+          "text": "via mon <%= typeAppareil %>"
+        }
+      ]
+    }
+  ],
+  "faqs": [
+    {
+      "question": "Je ne sais pas quel mode choisir lequel me conseillez-vous ?",
+      "answer": "L'utilisation d'un ordinateur vous permet de sauvegarder vos livres après leur téléchargement mais l'accès directement depuis votre <%= typAppareil %> peut être plus aisé pour une première utilisation.\n\nVous pouvez à tout moment revenir au début de cette aide en utilisant le sommaire situé en haut de la page. Vous pourrez alors parcourirles deux modes d'accès pour apprendre à les utiliser tous les deux ?"
+    }
+  ]
+}

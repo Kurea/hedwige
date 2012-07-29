@@ -1,0 +1,10 @@
+{
+	"folders":
+	[
+		{
+			"path": "/Users/romain/Documents/Dev/sinatra/hedwige",
+      "folder_exclude_patterns": ["vendor/bundle", "app/assets/js/vendor"],
+      "file_exclude_patterns": ["*.sublime-*"]
+		}
+	]
+}

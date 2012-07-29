@@ -11,5 +11,5 @@ RSpec.configure do |conf|
 end
 
 def app
-  Bookmailist
+  Hedwige
 end

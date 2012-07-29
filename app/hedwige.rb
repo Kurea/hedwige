@@ -47,9 +47,9 @@ class Hedwige < Sinatra::Base
   #
 
   # JSON data
-  get '/data/stages/:id' do
+  get '/data/stages/:identifier' do
     content_type :json
-    File.open("data/#{params[:id]}.json").read
+    File.open("data/#{params[:identifier]}.json").read
   end
 
   # All other URLs

@@ -1,0 +1,53 @@
+{
+  "identifier": "osTablette",
+  "prev": "appareil",
+  "next": [
+    {
+      "identifier": "compatTablette",
+      "conditions": {
+        "predicates": [
+          {
+            "identifier": "marque",
+            "value": "autre"
+          }
+        ]
+      }
+    },
+    {
+      "identifier": "modeTuto"
+    }
+  ],
+  "title": "Parlons de votre appareil",
+  "text": "Pour commencer nous allons nous assurer que votre appareil est bien compatible avec les livres numériques protégés par des DRM. Pour ce faire, nous vous remercions de répondre aux quelques questions suivantes:",
+  "forms": [
+    {
+      "identifier": "marque",
+      "type": "radio",
+      "label": "Votre <%= typeAppareil %> est :",
+      "choices": [ {
+          "identifier": "android",
+          "text": "un appareil Android ? (?)"
+        }, {
+          "identifier": "apple",
+          "text": "un appareil Apple ? (?)"
+        }, {
+          "identifier": "windows",
+          "text": "un appareil Windows ? (?)"
+        }, {
+          "identifier": "autre",
+          "text": "un autre type de <%= typeAppareil %>"
+        }
+      ]
+    }
+  ],
+  "faqs": [
+    {
+      "question": "Comment savoir dans quelle catégorie entre mon appareil ?",
+      "answer": "En cliquant sur le (?) situé à côté de chaque réponse, vous verrez apparaitre une image qui vous aidera à savoir quel est le système d'exploitation de votre appareil"
+    },
+    {
+      "question": "Pourquoi désirez-vous connaître cette information ?",
+      "answer": "Connaître le système d'exploitation de votre appareil nous permet de vous proposer une explication personnalisée pour votre appareil."
+    }
+  ]
+}

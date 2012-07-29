@@ -1,0 +1,70 @@
+{
+  "identifier": "osLiseuse",
+  "prev": "appareil",
+  "next": [
+    {
+      "identifier": "compatLiseuse",
+      "conditions": {
+        "predicates": [
+          {
+            "identifier": "marque",
+            "value": "autre"
+          }
+        ]
+      }
+    },
+    {
+      "identifier": "erreur",
+      "conditions": {
+        "predicates": [
+          {
+            "identifier": "marque",
+            "value": "kindle"
+          }
+        ]
+      }
+    },
+    {
+      "identifier": "osOrdi"
+    }
+  ],
+  "title": "Parlons de votre appareil",
+  "text": "Pour commencer nous allons nous assurer que votre appareil est bien compatible avec les livres numériques protégés par des DRM. Pour ce faire, nous vous remercions de répondre aux quelques questions suivantes:",
+  "forms": [
+    {
+      "identifier": "marque",
+      "type": "radio",
+      "label": "La marque de votre liseuse est :",
+      "choices": [ {
+          "identifier": "kobo",
+          "text": "Kobo (by Fnac ou non) ? (?)"
+        }, {
+          "identifier": "bookeen",
+          "text": "Bookeen ? (?)"
+        }, {
+          "identifier": "sony",
+          "text": "Sony ? (?)"
+        }, {
+          "identifier": "barnes",
+          "text": "Barnes & Nobles Nook ? (?)"
+        }, {
+          "identifier": "kindle",
+          "text": "Amazon Kindle ? (?)"
+        }, {
+          "identifier": "autre",
+          "text": "Une autre marque ?"
+        }
+      ]
+    }
+  ],
+  "faqs": [
+    {
+      "question": "Comment savoir dans quelle catégorie entre ma tablette ?",
+      "answer": "En cliquant sur le (?) situé à côté de chaque réponse, vous verrez apparaitre une image qui vous aidera à savoir quel est le système d'exploitation de votre appareil"
+    },
+    {
+      "question": "Pourquoi désirez-vous connaître cette information ?",
+      "answer": "Connaître le système d'exploitation de votre appareil nous permet de vous proposer une explication personnalisée pour votre appareil."
+    }
+  ]
+}

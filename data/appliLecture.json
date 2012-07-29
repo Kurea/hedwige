@@ -1,0 +1,40 @@
+{
+  "identifier": "appliLecture",
+  "prev": "appareil",
+  "title": "Votre application de lecture",
+  "text": "...",
+  "forms": [
+    {
+      "identifier": "appli",
+      "type": "radio",
+      "label": "Avez-vous déjà une application de lecture",
+      "choices": [ {
+          "identifier": "aldiko",
+          "text": "oui, Aldiko"
+        }, {
+          "identifier": "iBooks",
+          "text": "oui, iBooks"
+        }, {
+          "identifier": "blueFire",
+          "text": "oui, BlueFire Reader"
+        }, {
+          "identifier": "autre",
+          "text": "Oui, une autre application"
+        }, {
+          "identifier": "non",
+          "text": "Non, je n'ai pas encore d'application de lecture"
+        }
+      ]
+    }
+  ],
+  "faqs": [
+    {
+      "question": "?",
+      "answer": "..."
+    },
+    {
+      "question": "?",
+      "answer": "..."
+    }
+  ]
+}
