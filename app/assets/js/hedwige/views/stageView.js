@@ -30,13 +30,6 @@ function(Backbone, templateFaqs, templateStage) {
     events: {
       "change input": "selectedChoice"
     },
-    
-    selectedChoice: function(event) {
-      var formIdentifier = event.currentTarget.name;
-      var choiceIdentifier = event.currentTarget.id;
-      this.user.setChoice(formIdentifier, choiceIdentifier);
-      return false;
-    },
 
     initialize: function(options) {
       _.bindAll(this, 'render');
@@ -51,7 +44,7 @@ function(Backbone, templateFaqs, templateStage) {
     },
 
     render: function() {
-      console.log('render stage: ' + this.model.get('identifier'));
+      //console.log('StageView#render: ' + this.model.get('identifier'));
       this.$el.html(this.template(this.model.toJSON()));
       this.$el.find('#faqs').replaceWith(this.faqsView.render().el);
 
@@ -61,6 +54,13 @@ function(Backbone, templateFaqs, templateStage) {
       this.model.attributes.prev != undefined ? prevButton.show() : prevButton.hide();
       this.model.attributes.next != undefined ? nextButton.show() : nextButton.hide();
       return this;
+    },
+    
+    selectedChoice: function(event) {
+      var formIdentifier = event.currentTarget.name;
+      var choiceIdentifier = event.currentTarget.id;
+      this.user.setChoice(formIdentifier, choiceIdentifier);
+      return false;
     }
   });
 

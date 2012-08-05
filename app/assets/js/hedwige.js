@@ -39,7 +39,7 @@ requirejs(
 
 function ($, _, Backbone, Showdown, App) {
   $(function() {
-    console.log('loading Hedwige');    
+    //console.log('loading Hedwige');    
     window.App = new App;
   }); 
 });

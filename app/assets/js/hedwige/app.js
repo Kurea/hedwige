@@ -16,7 +16,7 @@ function(Backbone, AppRouter, User, Stage, StageView) {
     },
     
     loadStage: function(identifier) {
-      console.log('App#loadStage: ' + identifier);
+      //console.log('App#loadStage: ' + identifier);
 
       this.stage = new Stage({id: identifier});
       this.stage.bind('change', this.renderStage, this);
@@ -47,7 +47,7 @@ function(Backbone, AppRouter, User, Stage, StageView) {
 
     gotoNextStage: function(event) {
       var nextStageIdentifier = this.stage.nextStageIdentifierWithUser(this.user);
-      console.log('App#gotoNextStage: '+ nextStageIdentifier);
+      //console.log('App#gotoNextStage: '+ nextStageIdentifier);
 
       if (nextStageIdentifier != undefined) {
         this.loadStage(nextStageIdentifier);

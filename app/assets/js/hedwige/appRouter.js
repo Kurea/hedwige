@@ -12,7 +12,7 @@ define(['backbone'], function(Backbone) {
     },
 
     gotoStage: function(identifier) {
-      console.log('gotoStage: ' + identifier);
+      //console.log('gotoStage: ' + identifier);
       if (identifier == undefined) {
         // root page
         identifier = "accueil";
