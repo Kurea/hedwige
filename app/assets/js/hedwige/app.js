@@ -20,6 +20,7 @@ function(Backbone, AppRouter, User, Stage, StageView) {
 
       this.stage = new Stage({id: identifier});
       this.stage.bind('change', this.renderStage, this);
+      this.stage.fetch();
     },
 
     renderStage: function() {

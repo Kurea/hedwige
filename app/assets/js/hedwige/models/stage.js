@@ -3,11 +3,6 @@ define(['backbone'], function(Backbone) {
   var Stage = Backbone.Model.extend({
     urlRoot: '/data/stages',
 
-    initialize: function() {
-      console.log('fetching stage: ' + this.id);
-      this.fetch();
-    },
-
     nextStageIdentifierWithUser: function(user) {
       var next = this.get('next');
       if (typeof(next) == 'string') {
