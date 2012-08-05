@@ -39,13 +39,15 @@ function(Backbone, AppRouter, User, Stage, StageView) {
       console.log('App#gotoPreviousStage');
 
       var prevId;
-      if ((prevId = this.stage.attributes.prev) != undefined) {
+      if ((prevId = this.user.popStage() || this.stage.attributes.prev) != undefined) {
         this.loadStage(prevId);
       }
       return false;
     },
 
     gotoNextStage: function(event) {
+      this.user.pushStage(this.stage);
+
       var nextStageIdentifier = this.stage.nextStageIdentifierWithUser(this.user);
       //console.log('App#gotoNextStage: '+ nextStageIdentifier);
 

@@ -3,16 +3,25 @@ define(['backbone'], function(Backbone) {
   var User = Backbone.Model.extend({
 
     initialize: function() {
-      self.choices = {};
+      this.choices = {};
+      this.history = []; // ids of stages
     },
 
     setChoice: function(formIdentifier, choiceIdentifier) {
       console.log('User#setChoice: ' + formIdentifier + ' -> ' + choiceIdentifier);
-      self.choices[formIdentifier] = choiceIdentifier;
+      this.choices[formIdentifier] = choiceIdentifier;
     },
 
     getChoice: function(formIdentifier) {
-      return self.choices[formIdentifier];
+      return this.choices[formIdentifier];
+    },
+
+    pushStage: function(stage) {
+      this.history.push(stage.get('identifier'));
+    },
+
+    popStage: function() {
+      return this.history.pop();
     }
   });
 
