@@ -51,6 +51,24 @@ define(['backbone'], function(Backbone) {
           }
         }
       }
+    },
+
+    // Process stage's text without triggering 'change' events.
+    processTexts: function(userChoices) {
+      // Process text
+      this.attributes.text = _.template(this.get('text'), userChoices);
+
+      // Process forms
+      var forms = this.get('forms');
+      for (var formIndex in forms) {
+        var form = forms[formIndex];
+        form.label = _.template(form.label, userChoices);
+        for (var choiceIndex in form.choices) {
+          var choice = form.choices[choiceIndex];
+          choice.text = _.template(choice.text, userChoices);
+        }
+        // TODO catch ReferenceError if userChoices does not contain a reference in form.label
+      }
     }
   });
 

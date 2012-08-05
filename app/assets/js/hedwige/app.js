@@ -10,6 +10,8 @@ function(Backbone, AppRouter, User, Stage, StageView) {
     },
     
     initialize: function() {
+      _.bindAll(this, 'loadStage', 'processStage', 'renderStage');
+
       this.router = new AppRouter({app: this});
       this.user = new User();
       Backbone.history.start({pushState: true});
@@ -19,8 +21,13 @@ function(Backbone, AppRouter, User, Stage, StageView) {
       //console.log('App#loadStage: ' + identifier);
 
       this.stage = new Stage({id: identifier});
-      this.stage.bind('change', this.renderStage, this);
+      this.stage.bind('change', this.processStage, this);
       this.stage.fetch();
+    },
+
+    processStage: function() {
+      this.stage.processTexts(this.user.choices);
+      this.renderStage();
     },
 
     renderStage: function() {
