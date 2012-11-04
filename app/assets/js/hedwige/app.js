@@ -12,7 +12,7 @@ function(Backbone, AppRouter, User, Stage, StageView, StageFormView) {
     },
     
     initialize: function() {
-      _.bindAll(this, 'loadStage', 'processStage', 'renderView');
+      _.bindAll(this, 'loadStage', 'showStage', 'renderView');
 
       this.$container = this.$el.find('> .container');
 
@@ -27,20 +27,26 @@ function(Backbone, AppRouter, User, Stage, StageView, StageFormView) {
       //console.log('App#loadStage: ' + identifier);
 
       this.stage = new Stage({id: identifier});
-      this.stage.bind('change', this.processStage, this);
+      this.stage.bind('change', this.showStage, this);
       this.stage.fetch();
+    },
+
+    showStage: function() {
+      this.stage.processTexts(this.user.choices);
+      this.renderView(new StageView({model: this.stage, user: this.user}));
+      this.router.navigate(this.stage.get('identifier'));
+
+      // Adjust header's buttons
+      this.$el.find('#new-stage').show();
+      this.$el.find('#save').hide();
     },
 
     showStageForm: function() {
       this.renderView(new StageFormView());
-      this.$el.find('#new-stage').hide();
-    },
 
-    processStage: function() {
-      this.stage.processTexts(this.user.choices);
-      this.renderView(new StageView({model: this.stage, user: this.user}));
-      this.router.navigate(this.stage.get('identifier'));
-      this.$el.find('#new-stage').show();
+      // Adjust header's buttons
+      this.$el.find('#new-stage').hide();
+      this.$el.find('#save').show();
     },
 
     renderView: function(view) {

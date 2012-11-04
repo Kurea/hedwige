@@ -1,7 +1,8 @@
 %form
   #title.row
     .span12
-      %input{type: 'text', placeholder: 'Entrez un titre ici'}
+      %fieldset
+        %input{type: 'text', placeholder: 'Entrez un titre ici'}
 
   #content.row
 
@@ -10,28 +11,15 @@
 
     #content.span6
       #text
-        
+        %fieldset
+          %textarea{placeholder: 'Saisissez le texte de votre étape ici'}
       
       %form.form-horizontal
         %fieldsets
           .control-group
             %label.control-label
-              
             .controls
-              
               %label.radio
                 %input{:type => 'radio', :name => 'forms', :id => 'choice'} Choice
               
-      
-
-  .row
-    .span12
-      .btn-toolbar
-        #button-previous.btn.btn-large.pull-left
-          %i.icon-hand-left
-          = "Étape précédente"
-        #button-next.btn.btn-large.btn-primary.pull-right
-          %i.icon-hand-right.icon-white
-          = "Étape suivante"
-
   #faqs

@@ -19,4 +19,4 @@ function(Backbone, templateStageForm) {
   });
 
   return StageFormView;
-})
+});
