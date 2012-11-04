@@ -1,19 +1,25 @@
-define(['backbone', 'hedwige/appRouter', 'hedwige/models/user', 'hedwige/models/stage', 'hedwige/views/stageView'],
-function(Backbone, AppRouter, User, Stage, StageView) {
+define(['backbone', 'hedwige/app_router', 'hedwige/models/user', 'hedwige/models/stage', 'hedwige/views/stage_view', 'hedwige/views/stage_form_view'],
+function(Backbone, AppRouter, User, Stage, StageView, StageFormView) {
 
   var App = Backbone.View.extend({
-    el: $("#app"),
+    el: "#app",
     
     events: {
+      "click #logo":            "gotoHome",
       "click #button-previous": "gotoPreviousStage",
-      "click #button-next":     "gotoNextStage"
+      "click #button-next":     "gotoNextStage",
+      "click #new-stage":       "gotoNewStage"
     },
     
     initialize: function() {
-      _.bindAll(this, 'loadStage', 'processStage', 'renderStage');
+      _.bindAll(this, 'loadStage', 'processStage', 'renderView');
+
+      this.$container = this.$el.find('> .container');
 
       this.router = new AppRouter({app: this});
       this.user = new User();
+
+      // Only run once everything is setup
       Backbone.history.start({pushState: true});
     },
     
@@ -25,21 +31,28 @@ function(Backbone, AppRouter, User, Stage, StageView) {
       this.stage.fetch();
     },
 
-    processStage: function() {
-      this.stage.processTexts(this.user.choices);
-      this.renderStage();
+    showStageForm: function() {
+      this.renderView(new StageFormView());
+      this.$el.find('#new-stage').hide();
     },
 
-    renderStage: function() {
-      console.log('App#renderStage: ' + this.stage.get('identifier'));
-
-      if (this.stageView != undefined) {
-        this.stageView.remove();
-      }
-
-      this.stageView = new StageView({model: this.stage, user: this.user});
-      this.$el.append(this.stageView.render().$el);
+    processStage: function() {
+      this.stage.processTexts(this.user.choices);
+      this.renderView(new StageView({model: this.stage, user: this.user}));
       this.router.navigate(this.stage.get('identifier'));
+      this.$el.find('#new-stage').show();
+    },
+
+    renderView: function(view) {
+      if (this.currentView != undefined) {
+        this.currentView.remove();
+      }
+      this.currentView = view;
+      this.$container.append(this.currentView.render().el);
+    },
+
+    gotoHome: function(event) {
+      this.router.navigate('/', {trigger: true});
     },
 
     gotoPreviousStage: function(event) {
@@ -62,8 +75,12 @@ function(Backbone, AppRouter, User, Stage, StageView) {
         this.loadStage(nextStageIdentifier);
       }
       return false;
-    }
+    },
     
+    gotoNewStage: function(event) {
+      this.router.navigate('new_stage');
+      this.showStageForm();
+    }
   });
 
   return App;

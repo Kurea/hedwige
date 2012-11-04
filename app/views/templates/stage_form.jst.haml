@@ -1,0 +1,37 @@
+%form
+  #title.row
+    .span12
+      %input{type: 'text', placeholder: 'Entrez un titre ici'}
+
+  #content.row
+
+    #picture.span6
+      %img{:src => 'http://placehold.it/640x480'}
+
+    #content.span6
+      #text
+        
+      
+      %form.form-horizontal
+        %fieldsets
+          .control-group
+            %label.control-label
+              
+            .controls
+              
+              %label.radio
+                %input{:type => 'radio', :name => 'forms', :id => 'choice'} Choice
+              
+      
+
+  .row
+    .span12
+      .btn-toolbar
+        #button-previous.btn.btn-large.pull-left
+          %i.icon-hand-left
+          = "Étape précédente"
+        #button-next.btn.btn-large.btn-primary.pull-right
+          %i.icon-hand-right.icon-white
+          = "Étape suivante"
+
+  #faqs

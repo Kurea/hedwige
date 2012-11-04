@@ -7,11 +7,13 @@
 
   %body
     
-    .navbar.navbar-fixed-top
-      .navbar-inner
-        .container
-          %a.brand{:href => '#'} Hedwige
+    #app
+      .navbar.navbar-fixed-top
+        .navbar-inner
+          .container
+            %a#logo.brand{:href => '#'} Hedwige
+            %button#new-stage.pull-right.btn Ajouter une page
 
-    #app.container
+      .container
 
     != js :main
