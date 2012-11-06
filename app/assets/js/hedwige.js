@@ -9,6 +9,7 @@ requirejs.config({
   // the paths config could be for a directory.
   paths: {
     hedwige:  '/js/hedwige',
+    lib:      '/js/lib',
     showdown: 'showdown/src/showdown',
     template: '/jst'
   },
@@ -28,6 +29,17 @@ requirejs.config({
     },
     'showdown': {
       exports: 'Showdown'
+    },
+    'chosen.jquery': {
+    }
+  },
+
+  map: {
+    'lib/jquery.custom': {
+      'jquery': 'jquery'
+    },
+    '*': {
+      'jquery': 'lib/jquery.custom',
     }
   }
 });
