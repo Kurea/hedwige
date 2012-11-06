@@ -18,7 +18,7 @@ define(['backbone'], function(Backbone) {
           var stage = next[stageIndex];
 
           // going through each possible stage in order, checking conditions and returning
-          // the identifier as soon one stage with valid conditions is found
+          // the key as soon one stage with valid conditions is found
           if (stage.conditions != undefined) {
             if (stage.conditions.constructor.name == 'Object') {
               stage.conditions = [stage.conditions];
@@ -30,7 +30,7 @@ define(['backbone'], function(Backbone) {
               var predicatesValid = true;
               for (var predicateIndex in condition.predicates) {
                 var predicate = condition.predicates[predicateIndex];
-                if (user.getChoice(predicate.identifier) != predicate.value) {
+                if (user.getChoice(predicate.key) != predicate.value) {
                   predicatesValid = false;
                   break;
                 }
@@ -43,11 +43,11 @@ define(['backbone'], function(Backbone) {
             }
 
             if (conditionsValid == true) {
-              return stage.identifier;
+              return stage.key;
             }
           }
           else {
-            return stage.identifier;
+            return stage.key;
           }
         }
       }

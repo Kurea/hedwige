@@ -1,5 +1,5 @@
 {
-  "identifier": "accueil",
+  "key": "accueil",
   "next": "appareil",
   "title": "Bienvenue chez Hedwige !",
   "text": "#Bienvenue !\nVous disposez d'une tablette ou d'une liseuse ? Saviez-vous que vous pouvez emprunter des livres numériques dans un nombre croissant de bibliothèques ? Ces prêts sont rendus possibles par l'invention du livre numérique chronodégradable. Il s'agit de livres auxquels vous pouvez accéder durant une période de temps limitée après quoi ils sont retournés automatiquement à la bibliothèque et sont empruntables à nouveau.\nLe seul inconvénient de cette méthode est qu'elle nécessite une petite configuration de votre tablette ou liseuse pour pouvoir lire ces livres.\n\nNous allons vous montrer en quelques étapes simples comment emprunter des livres numériques dans votre bibliothèque et les lire sur votre tablette ou sur votre liseuse.\n\nVous pouvez également utiliser cette méthode pour lire des livres numériques protégés par des DRM. Les DRM ont été conçus pour protéger les livres numériques du piratage en ne permettant qu'au propriétaire du livre d'y accéder. Un peu comme un cadenas qui serait posé sur votre bibliothèque et dont vous seul auriez la clé.",

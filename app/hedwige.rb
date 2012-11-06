@@ -46,10 +46,15 @@ class Hedwige < Sinatra::Base
   # App routes
   #
 
-  # JSON data
-  get '/data/stages/:identifier' do
+  get '/data/stage_references' do
     content_type :json
-    File.open("data/#{params[:identifier]}.json").read
+    Stage.references.to_json
+  end
+
+  # JSON data
+  get '/data/stages/:key' do
+    content_type :json
+    File.open("data/#{params[:key]}.json").read
   end
 
   # All other URLs

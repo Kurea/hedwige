@@ -44,7 +44,7 @@ function(Backbone, templateFaqs, templateStage) {
     },
 
     render: function() {
-      //console.log('StageView#render: ' + this.model.get('identifier'));
+      //console.log('StageView#render: ' + this.model.get('key'));
       this.$el.html(this.template(this.model.toJSON()));
       this.$el.find('#faqs').replaceWith(this.faqsView.render().el);
 

@@ -1,5 +1,16 @@
-define(['backbone', 'hedwige/app_router', 'hedwige/models/user', 'hedwige/models/stage', 'hedwige/views/stage_view', 'hedwige/views/stage_form_view'],
-function(Backbone, AppRouter, User, Stage, StageView, StageFormView) {
+define([
+  'backbone',
+  'hedwige/app_router',
+  'hedwige/models/user',
+  'hedwige/collections/stage_references_collection', 'hedwige/models/stage_reference',
+  'hedwige/models/stage', 'hedwige/views/stage_view', 'hedwige/views/stage_form_view'],
+
+function(
+  Backbone,
+  AppRouter,
+  User,
+  StageReferencesCollection, stageReference,
+  Stage, StageView, StageFormView) {
 
   var App = Backbone.View.extend({
     el: "#app",
@@ -8,7 +19,8 @@ function(Backbone, AppRouter, User, Stage, StageView, StageFormView) {
       "click #logo":            "gotoHome",
       "click #button-previous": "gotoPreviousStage",
       "click #button-next":     "gotoNextStage",
-      "click #new-stage":       "gotoNewStage"
+      "click #new-stage":       "gotoNewStage",
+      "click #save":            "save"
     },
     
     initialize: function() {
@@ -18,15 +30,17 @@ function(Backbone, AppRouter, User, Stage, StageView, StageFormView) {
 
       this.router = new AppRouter({app: this});
       this.user = new User();
+      this.stageReferences = new StageReferencesCollection();
+      this.stageReferences.fetch();
 
       // Only run once everything is setup
       Backbone.history.start({pushState: true});
     },
     
-    loadStage: function(identifier) {
-      //console.log('App#loadStage: ' + identifier);
+    loadStage: function(key) {
+      //console.log('App#loadStage: ' + key);
 
-      this.stage = new Stage({id: identifier});
+      this.stage = new Stage({id: key});
       this.stage.bind('change', this.showStage, this);
       this.stage.fetch();
     },
@@ -34,7 +48,7 @@ function(Backbone, AppRouter, User, Stage, StageView, StageFormView) {
     showStage: function() {
       this.stage.processTexts(this.user.choices);
       this.renderView(new StageView({model: this.stage, user: this.user}));
-      this.router.navigate(this.stage.get('identifier'));
+      this.router.navigate(this.stage.get('key'));
 
       // Adjust header's buttons
       this.$el.find('#new-stage').show();
@@ -42,7 +56,7 @@ function(Backbone, AppRouter, User, Stage, StageView, StageFormView) {
     },
 
     showStageForm: function() {
-      this.renderView(new StageFormView());
+      this.renderView(new StageFormView({stageReferences: this.stageReferences}));
 
       // Adjust header's buttons
       this.$el.find('#new-stage').hide();
@@ -86,6 +100,10 @@ function(Backbone, AppRouter, User, Stage, StageView, StageFormView) {
     gotoNewStage: function(event) {
       this.router.navigate('new_stage');
       this.showStageForm();
+    },
+
+    save: function(event) {
+      this.currentView.save();
     }
   });
 

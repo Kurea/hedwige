@@ -1,57 +1,57 @@
 {
-  "identifier": "osLiseuse",
+  "key": "osLiseuse",
   "prev": "appareil",
   "next": [
     {
-      "identifier": "compatLiseuse",
+      "key": "compatLiseuse",
       "conditions": {
         "predicates": [
           {
-            "identifier": "marque",
+            "key": "marque",
             "value": "autre"
           }
         ]
       }
     },
     {
-      "identifier": "erreur",
+      "key": "erreur",
       "conditions": {
         "predicates": [
           {
-            "identifier": "marque",
+            "key": "marque",
             "value": "kindle"
           }
         ]
       }
     },
     {
-      "identifier": "osOrdi"
+      "key": "osOrdi"
     }
   ],
   "title": "Parlons de votre appareil",
   "text": "Pour commencer nous allons nous assurer que votre appareil est bien compatible avec les livres numériques protégés par des DRM. Pour ce faire, nous vous remercions de répondre aux quelques questions suivantes:",
   "forms": [
     {
-      "identifier": "marque",
+      "key": "marque",
       "type": "radio",
       "label": "La marque de votre liseuse est :",
       "choices": [ {
-          "identifier": "kobo",
+          "key": "kobo",
           "text": "Kobo (by Fnac ou non) ? (?)"
         }, {
-          "identifier": "bookeen",
+          "key": "bookeen",
           "text": "Bookeen ? (?)"
         }, {
-          "identifier": "sony",
+          "key": "sony",
           "text": "Sony ? (?)"
         }, {
-          "identifier": "barnes",
+          "key": "barnes",
           "text": "Barnes & Nobles Nook ? (?)"
         }, {
-          "identifier": "kindle",
+          "key": "kindle",
           "text": "Amazon Kindle ? (?)"
         }, {
-          "identifier": "autre",
+          "key": "autre",
           "text": "Une autre marque ?"
         }
       ]

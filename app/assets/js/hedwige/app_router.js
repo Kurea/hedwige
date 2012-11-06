@@ -4,7 +4,7 @@ define(['backbone'], function(Backbone) {
     routes: {
       "new_stage":     "newStage",
       "":             "gotoStage",
-      ":identifier":  "gotoStage"
+      ":key":  "gotoStage"
     },
 
     initialize: function(options) {
@@ -12,13 +12,13 @@ define(['backbone'], function(Backbone) {
       _.bindAll(this, 'gotoStage', 'newStage');
     },
 
-    gotoStage: function(identifier) {
-      console.log('Router#gotoStage: ' + identifier);
-      if (identifier == undefined) {
+    gotoStage: function(key) {
+      console.log('Router#gotoStage: ' + key);
+      if (key == undefined) {
         // root page
-        identifier = "accueil";
+        key = "accueil";
       }
-      this.app.loadStage(identifier);
+      this.app.loadStage(key);
     },
 
     newStage: function() {

@@ -17,7 +17,7 @@ define(['backbone'], function(Backbone) {
     },
 
     pushStage: function(stage) {
-      this.history.push(stage.get('identifier'));
+      this.history.push(stage.get('key'));
     },
 
     popStage: function() {

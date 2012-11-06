@@ -1,5 +1,5 @@
 {
-  "identifier": "versionOS",
+  "key": "versionOS",
   "prev": "osOrdi",
   "title": "Votre OS",
   "text": "...",

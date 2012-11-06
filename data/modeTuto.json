@@ -1,34 +1,34 @@
 {
-  "identifier": "modeTuto",
+  "key": "modeTuto",
   "prev": "osTablette",
   "next": [
     {
-      "identifier": "appliLecture",
+      "key": "appliLecture",
       "conditions": {
         "predicates": [
           {
-            "identifier": "modeTuto",
+            "key": "modeTuto",
             "value": "tablette"
           }
         ]
       }
     },
     {
-      "identifier": "osOrdi"
+      "key": "osOrdi"
     }
   ],
   "title": "Parlons de votre appareil",
   "text": "Votre appareil permet d'accéder à internet. Nous pouvons donc vous proposer deux modes d'accès différents aux livres numériques protégés :\n\n- via votre ordinateur\n- directement via votre <%= typAppareil %>",
   "forms": [
     {
-      "identifier": "modeTuto",
+      "key": "modeTuto",
       "type": "radio",
       "label": "Veillez choisir le mode d'accès qui vous correspond le mieux :",
       "choices": [ {
-          "identifier": "ordi",
+          "key": "ordi",
           "text": "via mon ordinateur"
         }, {
-          "identifier": "tablette",
+          "key": "tablette",
           "text": "via mon <%= typeAppareil %>"
         }
       ]

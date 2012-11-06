@@ -1,34 +1,34 @@
 {
-  "identifier": "compatTablette",
+  "key": "compatTablette",
   "prev": "osTablette",
   "next": [
     {
-      "identifier": "erreur",
+      "key": "erreur",
       "conditions": {
         "predicates": [
           {
-            "identifier": "compatible",
+            "key": "compatible",
             "value": "ko"
           }
         ]
       }
     },
     {
-      "identifier": "modeTuto"
+      "key": "modeTuto"
     }
   ],
   "title": "Parlons de votre appareil",
   "text": "Vous avez indiqué que votre liseuse est d'une autre marque. \n\nNous vous invitons à vérifier qu'elle propose bien une application de lecture compatible avec les fichiers ePub protégés par des DRM Adobe. \n\nUne liste des applications compatible est disponible sur le site d'Adobe : [cliquez ici pour y accéder](http://blogs.adobe.com/digitalpublishing/supported-devices).\n\nSi vous ne trouvez pas d'application répondant à ces critères il est très probable que votre liseuse ne soit pas compatible avec les DRM et que vous ne puissiez donc pas lire les livres numériques protégés.",
   "forms": [
     {
-      "identifier": "compatible",
+      "key": "compatible",
       "type": "radio",
       "label": "Votre appareil est-il compatible ?",
       "choices": [ {
-          "identifier": "ok",
+          "key": "ok",
           "text": "Oui, je pense que mon appareil est compatible"
         }, {
-          "identifier": "ko",
+          "key": "ko",
           "text": "Non, je pense que mon appareil n'est pas compatible"
         }
       ]

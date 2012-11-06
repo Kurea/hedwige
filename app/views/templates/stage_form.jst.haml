@@ -1,8 +1,30 @@
-%form
+%form.form-horizontal
+  #extra.row
+
+    .span12
+      .well
+        %h3 Références de l'étape
+        %fieldset
+          .control-group
+            %label.control-label{for: 'stage_key'} Identifiant
+            .controls
+              %input.input-large{type: 'text', id: 'stage_key', name: 'stage[key]'}
+          .control-group
+            %label.control-label{for: 'stage_previous'} Étape précédente :
+            .controls
+              %select.chzn-select{id: 'stage_previous', name: 'stage[previous]'}
+          .control-group
+            %label.control-label{for: 'stage_next'} Étape suivante :
+            .controls
+              %select.chzn-select{id: 'stage_next', name: 'stage[next]'}
+                <% stageReferences.each(function(stageReference) { %>
+                %option{value: '<%= stageReference.key %>'} <%= stageReference.title %>
+                <% }) %>
+
   #title.row
     .span12
       %fieldset
-        %input{type: 'text', placeholder: 'Entrez un titre ici'}
+        %input.input-xxlarge{type: 'text', placeholder: 'Entrez un titre ici', id: 'stage_title', name: 'stage[title]'}
 
   #content.row
 
@@ -12,9 +34,9 @@
     #content.span6
       #text
         %fieldset
-          %textarea{placeholder: 'Saisissez le texte de votre étape ici'}
+          %textarea{placeholder: 'Saisissez le texte de votre étape ici', name: 'text'}
       
-      %form.form-horizontal
+      -#%form.form-horizontal
         %fieldsets
           .control-group
             %label.control-label

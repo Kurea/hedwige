@@ -1,61 +1,61 @@
 {
-  "identifier": "osOrdi",
+  "key": "osOrdi",
   "prev": "appareil",
   "next": [
     {
-      "identifier": "erreur",
+      "key": "erreur",
       "conditions": {
         "predicates": [
           {
-            "identifier": "osOrdi",
+            "key": "osOrdi",
             "value": "noOrdi"
           },
           {
-            "identifier": "typeAppareil",
+            "key": "typeAppareil",
             "value": "liseuse"
           }
         ]
       }
     },
     {
-      "identifier": "appliLecture",
+      "key": "appliLecture",
       "conditions": {
         "predicates": [
           {
-            "identifier": "osOrdi",
+            "key": "osOrdi",
             "value": "noOrdi"
           }
         ]
       }
     },
     {
-      "identifier": "versionOS"
+      "key": "versionOS"
     }
   ],
   "title": "Parlons de votre ordinateur",
   "text": "Afin de vous proposer les explications les plus précises possibles, nous aurions besoin de connaître le système d'exploitation de votre ordinateur",
   "forms": [
     {
-      "identifier": "osOrdi",
+      "key": "osOrdi",
       "type": "radio",
       "label": "Votre ordinateur urilise :",
       "choices": [ {
-          "identifier": "winVista",
+          "key": "winVista",
           "text": "Microsoft Windows Vista ou 7 ? (?)"
         }, {
-          "identifier": "winXP",
+          "key": "winXP",
           "text": "une autre version de Microsoft Windows ? (?)"
         }, {
-          "identifier": "MacIntel",
+          "key": "MacIntel",
           "text": "Mac OS X 10.5 ou supérieur (Leopard, Snow Leopard, Lion, Mountain Lion) ? (?)"
         }, {
-          "identifier": "MacPPC",
+          "key": "MacPPC",
           "text": "une version de Mac OS X antérieure ? (?)"
         }, {
-          "identifier": "linux",
+          "key": "linux",
           "text": "Linux (Ubuntu, SUSE, Debian…) ? (?)"
         }, {
-          "identifier": "noOrdi",
+          "key": "noOrdi",
           "text": "Je n'ai pas d'ordinateur"
         }
       ]

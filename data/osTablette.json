@@ -1,40 +1,40 @@
 {
-  "identifier": "osTablette",
+  "key": "osTablette",
   "prev": "appareil",
   "next": [
     {
-      "identifier": "compatTablette",
+      "key": "compatTablette",
       "conditions": {
         "predicates": [
           {
-            "identifier": "marque",
+            "key": "marque",
             "value": "autre"
           }
         ]
       }
     },
     {
-      "identifier": "modeTuto"
+      "key": "modeTuto"
     }
   ],
   "title": "Parlons de votre appareil",
   "text": "Pour commencer nous allons nous assurer que votre appareil est bien compatible avec les livres numériques protégés par des DRM. Pour ce faire, nous vous remercions de répondre aux quelques questions suivantes:",
   "forms": [
     {
-      "identifier": "marque",
+      "key": "marque",
       "type": "radio",
       "label": "Votre <%= typeAppareil %> est :",
       "choices": [ {
-          "identifier": "android",
+          "key": "android",
           "text": "un appareil Android ? (?)"
         }, {
-          "identifier": "apple",
+          "key": "apple",
           "text": "un appareil Apple ? (?)"
         }, {
-          "identifier": "windows",
+          "key": "windows",
           "text": "un appareil Windows ? (?)"
         }, {
-          "identifier": "autre",
+          "key": "autre",
           "text": "un autre type de <%= typeAppareil %>"
         }
       ]
