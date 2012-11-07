@@ -29,8 +29,6 @@ requirejs.config({
     },
     'showdown': {
       exports: 'Showdown'
-    },
-    'chosen.jquery': {
     }
   },
 
@@ -46,12 +44,10 @@ requirejs.config({
 
 // Start the main app logic.
 requirejs(
-  [ 'jquery', 'underscore', 'backbone', 'showdown',
-    'hedwige/app'],
+  [ "require.deps!hedwige/app" ],
 
-function ($, _, Backbone, Showdown, App) {
+function (App) {
   $(function() {
-    //console.log('loading Hedwige');    
     window.App = new App;
   }); 
 });
