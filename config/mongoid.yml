@@ -1,0 +1,13 @@
+development:
+  sessions:
+    default:
+      hosts:
+        - localhost:27017
+      database: hedwige_development
+
+test:
+  sessions:
+    default:
+      hosts:
+        - localhost:27017
+      database: hedwige_test
