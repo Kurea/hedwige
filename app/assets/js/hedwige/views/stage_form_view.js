@@ -4,7 +4,7 @@ function(Backbone, templateStageForm) {
   var StageFormView = Backbone.View.extend({
     id: 'stage-form',
     template: templateStageForm,
-    partialSelect: '<option value="<%= key %>"><%= title %></option>',
+    partialSelect: '<option value="<%= key %>"><%= title %> (<%= key %>)</option>',
 
     events: {
     },
@@ -13,21 +13,12 @@ function(Backbone, templateStageForm) {
       _.bindAll(this, 'render');
       this.stageReferences = this.options.stageReferences;
       this.stageReferences.bind('reset', this.updateStageReferences, this);
+      this.stageReferences.fetch();
     },
 
     render: function() {
       this.$el.html(this.template({stageReferences: this.stageReferences}));
       return this;
-    },
-
-    save: function() {
-      console.log('StageFormView#save');
-      var data = {};
-      _.each(this.$el.find('input, textarea'), function(field) {
-        data[field.name] = $(field).val();
-      });
-      console.log(data);
-      return data;
     },
 
     updateStageReferences: function() {
@@ -38,7 +29,18 @@ function(Backbone, templateStageForm) {
         that.stageReferences.each(function(stageReference) {
           $(select).append(_.template(that.partialSelect, stageReference.toJSON()));
         });
+        $(select).chosen();
       });
+    },
+
+    save: function() {
+      console.log('StageFormView#save');
+      var data = {};
+      _.each(this.$el.find('[name*=stage]'), function(field) {
+        data[field.name] = $(field).val();
+      });
+      console.log(data);
+      return data;
     }
   });
 
