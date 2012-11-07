@@ -27,6 +27,10 @@ group :development do
 end
 
 group :development, :test do
+  gem 'pry-rails'
+  gem 'pry-debugger'
+  gem 'pry-stack_explorer'
+  gem 'pry-remote'
 	gem 'rspec'
   gem 'rspec-instafail'
 	gem 'rack-test'

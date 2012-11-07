@@ -18,11 +18,21 @@ GEM
       i18n (~> 0.6)
       multi_json (~> 1.0)
     addressable (2.2.7)
+    binding_of_caller (0.6.8)
     bson (1.6.4)
     bson_ext (1.6.2)
       bson (~> 1.6.2)
     builder (3.0.4)
+    coderay (1.0.8)
+    columnize (0.3.6)
     daemons (1.1.8)
+    debugger (1.1.4)
+      columnize (>= 0.3.1)
+      debugger-linecache (~> 1.1.1)
+      debugger-ruby_core_source (~> 1.1.3)
+    debugger-linecache (1.1.2)
+      debugger-ruby_core_source (>= 1.1.1)
+    debugger-ruby_core_source (1.1.4)
     diff-lcs (1.1.3)
     eventmachine (0.12.10)
     ffi (1.0.11)
@@ -46,6 +56,7 @@ GEM
       rb-fchange (~> 0.0.5)
       rb-fsevent (~> 0.9.1)
       rb-inotify (~> 0.8.8)
+    method_source (0.8.1)
     mime-types (1.18)
     mongoid (3.0.11)
       activemodel (~> 3.1)
@@ -57,6 +68,20 @@ GEM
     netrc (0.7.1)
     nokogiri (1.5.2)
     origin (1.0.10)
+    pry (0.9.10)
+      coderay (~> 1.0.5)
+      method_source (~> 0.8)
+      slop (~> 3.3.1)
+    pry-debugger (0.2.0)
+      debugger (~> 1.1.3)
+      pry (~> 0.9.9)
+    pry-rails (0.2.2)
+      pry (>= 0.9.10)
+    pry-remote (0.1.6)
+      pry (~> 0.9)
+      slop (~> 3.0)
+    pry-stack_explorer (0.4.7)
+      binding_of_caller (~> 0.6.8)
     rack (1.4.1)
     rack-protection (1.2.0)
       rack
@@ -89,6 +114,7 @@ GEM
       rack-test
       sinatra
       tilt (>= 1.3.0)
+    slop (3.3.3)
     spoon (0.0.1)
     thin (1.3.1)
       daemons (>= 1.0.9)
@@ -113,6 +139,10 @@ DEPENDENCIES
   json
   mongoid
   nokogiri
+  pry-debugger
+  pry-rails
+  pry-remote
+  pry-stack_explorer
   rack-test
   rspec
   rspec-instafail
