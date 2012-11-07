@@ -55,7 +55,7 @@ class Hedwige < Sinatra::Base
   # JSON data
   get '/data/stages/:key' do
     content_type :json
-    File.open("data/#{params[:key]}.json").read
+    Stage.find_by_key(params[:key]).to_json
   end
 
   # All other URLs

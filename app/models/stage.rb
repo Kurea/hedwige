@@ -9,6 +9,10 @@ class Stage
   field :text, :type => String
   embeds_many :faqs
 
+  def self.find_by_key(key)
+    Stage.where(:key => key).first
+  end
+
   def self.references
     Stage.all.collect do |stage|
       {
