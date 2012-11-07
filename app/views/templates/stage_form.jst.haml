@@ -12,14 +12,11 @@
           .control-group
             %label.control-label{for: 'stage_previous'} Étape précédente :
             .controls
-              %select.chzn-select{id: 'stage_previous', name: 'stage[previous]'}
+              %select{id: 'stage_previous', name: 'stage[previous]'}
           .control-group
             %label.control-label{for: 'stage_next'} Étape suivante :
             .controls
-              %select.chzn-select{id: 'stage_next', name: 'stage[next]'}
-                <% stageReferences.each(function(stageReference) { %>
-                %option{value: '<%= stageReference.key %>'} <%= stageReference.title %>
-                <% }) %>
+              %select{id: 'stage_next', name: 'stage[next]'}
 
   #title.row
     .span12
@@ -34,7 +31,7 @@
     #content.span6
       #text
         %fieldset
-          %textarea{placeholder: 'Saisissez le texte de votre étape ici', name: 'text'}
+          %textarea{placeholder: 'Saisissez le texte de votre étape ici', id: 'stage_text', name: 'stage[text]'}
       
       -#%form.form-horizontal
         %fieldsets
