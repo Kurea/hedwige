@@ -30,7 +30,8 @@ class Hedwige < Sinatra::Base
       '/css/bootstrap.css',
       '/css/hedwige-base.css',
       '/css/bootstrap-responsive.css',
-      '/css/hedwige.css'
+      '/css/hedwige.css',
+      '/css/chosen.css'
     ]
 
     js :main, [
