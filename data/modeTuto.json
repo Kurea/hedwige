@@ -18,7 +18,7 @@
     }
   ],
   "title": "Parlons de votre appareil",
-  "text": "Votre appareil permet d'accéder à internet. Nous pouvons donc vous proposer deux modes d'accès différents aux livres numériques protégés :\n\n- via votre ordinateur\n- directement via votre <%= typAppareil %>",
+  "text": "Votre appareil permet d'accéder à internet. Nous pouvons donc vous proposer deux modes d'accès différents aux livres numériques protégés :\n\n- via votre ordinateur\n- directement via votre <%= typeAppareil %>",
   "forms": [
     {
       "key": "modeTuto",
@@ -37,7 +37,7 @@
   "faqs": [
     {
       "question": "Je ne sais pas quel mode choisir lequel me conseillez-vous ?",
-      "answer": "L'utilisation d'un ordinateur vous permet de sauvegarder vos livres après leur téléchargement mais l'accès directement depuis votre <%= typAppareil %> peut être plus aisé pour une première utilisation.\n\nVous pouvez à tout moment revenir au début de cette aide en utilisant le sommaire situé en haut de la page. Vous pourrez alors parcourirles deux modes d'accès pour apprendre à les utiliser tous les deux ?"
+      "answer": "L'utilisation d'un ordinateur vous permet de sauvegarder vos livres après leur téléchargement mais l'accès directement depuis votre <%= typeAppareil %> peut être plus aisé pour une première utilisation.\n\nVous pouvez à tout moment revenir au début de cette aide en utilisant le sommaire situé en haut de la page. Vous pourrez alors parcourirles deux modes d'accès pour apprendre à les utiliser tous les deux ?"
     }
   ]
 }

@@ -48,11 +48,17 @@ function(Backbone, templateFaqs, templateStage) {
       this.$el.html(this.template(this.model.toJSON()));
       this.$el.find('#faqs').replaceWith(this.faqsView.render().el);
 
-      // Show/hide buttons
+      // Buttons
       var prevButton = this.$el.find('#button-previous');
-      var nextButton = this.$el.find('#button-next');
+      var nextButton = this.$nextButton = this.$el.find('#button-next');
+      
+      // Show/hide
       this.model.attributes.prev != undefined ? prevButton.show() : prevButton.hide();
       this.model.attributes.next != undefined ? nextButton.show() : nextButton.hide();
+
+      // Enable/disable next
+      if (this.model.get('forms') != undefined) nextButton.addClass('disabled');
+
       return this;
     },
     
@@ -60,6 +66,9 @@ function(Backbone, templateFaqs, templateStage) {
       var formIdentifier = event.currentTarget.name;
       var choiceIdentifier = event.currentTarget.id;
       this.user.setChoice(formIdentifier, choiceIdentifier);
+
+      this.$nextButton.removeClass('disabled');
+      
       return false;
     }
   });

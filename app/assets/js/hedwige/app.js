@@ -85,14 +85,16 @@ function(
       return false;
     },
 
+    // the click event should be processed in StageView which should trigger the appropriate
+    // event
     gotoNextStage: function(event) {
-      this.user.pushStage(this.stage);
+      if (!$(event.target).hasClass('disabled')) {
+        this.user.pushStage(this.stage);
 
-      var nextStageIdentifier = this.stage.nextStageIdentifierWithUser(this.user);
-      //console.log('App#gotoNextStage: '+ nextStageIdentifier);
-
-      if (nextStageIdentifier != undefined) {
-        this.loadStage(nextStageIdentifier);
+        var nextStageIdentifier = this.stage.nextStageIdentifierWithUser(this.user);
+        if (nextStageIdentifier != undefined) {
+          this.loadStage(nextStageIdentifier);
+        }
       }
       return false;
     },
