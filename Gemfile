@@ -20,7 +20,7 @@ gem 'activesupport'
 group :development do
 	gem 'ruby_gntp'
   gem 'guard'
-  #gem 'guard-bundler'
+  gem 'guard-bundler'
   gem 'guard-shotgun', :git => "git@github.com:rchampourlier/guard-shotgun.git", :branch => "master"
   gem 'guard-rspec'
   gem 'heroku'

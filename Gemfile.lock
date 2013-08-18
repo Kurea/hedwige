@@ -39,6 +39,9 @@ GEM
     guard (1.2.3)
       listen (>= 0.4.2)
       thor (>= 0.14.6)
+    guard-bundler (1.0.0)
+      bundler (~> 1.0)
+      guard (~> 1.1)
     guard-rspec (0.7.0)
       guard (>= 0.10.0)
     haml (3.1.4)
@@ -132,6 +135,7 @@ DEPENDENCIES
   bson_ext
   bundler
   guard
+  guard-bundler
   guard-rspec
   guard-shotgun!
   haml

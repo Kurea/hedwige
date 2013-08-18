@@ -1,6 +1,6 @@
-#guard 'bundler' do
-#  watch('Gemfile')
-#end
+guard 'bundler' do
+  watch('Gemfile')
+end
 
 guard 'shotgun' do
   watch(%r{^(app|assets|lib|config)/(.)*.(rb|css|js|haml)})
