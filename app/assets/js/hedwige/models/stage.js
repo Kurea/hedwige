@@ -3,6 +3,12 @@ define(['backbone'], function(Backbone) {
   var Stage = Backbone.Model.extend({
     urlRoot: '/data/stages',
 
+    initialize: function(attributes, options) {
+      this.on('change:text', function() {
+        this.processTexts(options.user.choices);
+      });
+    },
+
     nextStageIdentifierWithUser: function(user) {
       var next = this.get('next');
       if (typeof(next) == 'string') {
@@ -68,6 +74,15 @@ define(['backbone'], function(Backbone) {
           choice.text = _.template(choice.text, userChoices);
         }
         // TODO catch ReferenceError if userChoices does not contain a reference in form.label
+
+      // Process faqs
+      var faqs = this.get('faqs');
+      for (var faqIndex in faqs) {
+        var faq = faqs[faqIndex];
+        faq.question = _.template(faq.question, userChoices);
+        faq.answer = _.template(faq.answer, userChoices);
+      }
+
       }
     }
   });

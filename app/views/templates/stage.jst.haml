@@ -9,8 +9,7 @@
 
   #content.span6
     #text
-      <% var converter = new Showdown.converter() %>
-      <%= converter.makeHtml(text) %>
+      <%= App.md2html(text) %>
     <% if (typeof(forms) != "undefined") { %>
     %form.form-horizontal
       %fieldsets

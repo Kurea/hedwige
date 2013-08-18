@@ -33,6 +33,8 @@ function(
       this.stageReferences = new StageReferencesCollection();
       this.stageReferences.fetch();
 
+      this.converter = new Showdown.converter();
+
       // Only run once everything is setup
       Backbone.history.start({pushState: true});
     },
@@ -40,13 +42,12 @@ function(
     loadStage: function(key) {
       //console.log('App#loadStage: ' + key);
 
-      this.stage = new Stage({id: key});
+      this.stage = new Stage({id: key}, {user: this.user});
       this.stage.bind('change', this.showStage, this);
       this.stage.fetch();
     },
 
     showStage: function() {
-      this.stage.processTexts(this.user.choices);
       this.renderView(new StageView({model: this.stage, user: this.user}));
       this.router.navigate(this.stage.get('key'));
 
@@ -106,6 +107,10 @@ function(
 
     save: function(event) {
       this.currentView.save();
+    },
+
+    md2html: function(text) {
+      return this.converter.makeHtml(text);
     }
   });
 
