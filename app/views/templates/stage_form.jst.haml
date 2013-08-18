@@ -21,7 +21,7 @@
   #title.row
     .span12
       %fieldset
-        %input.input-xxlarge{type: 'text', placeholder: 'Entrez un titre ici', id: 'stage_title', name: 'stage[title]'}
+        %input.input.input-fullwidth{type: 'text', placeholder: 'Entrez un titre ici', id: 'stage_title', name: 'stage[title]'}
 
   #content.row
 
@@ -31,7 +31,7 @@
     #content.span6
       #text
         %fieldset
-          %textarea{placeholder: 'Saisissez le texte de votre étape ici', id: 'stage_text', name: 'stage[text]'}
+          %textarea.input-fullwidth{placeholder: 'Saisissez le texte de votre étape ici', id: 'stage_text', name: 'stage[text]'}
       
       -#%form.form-horizontal
         %fieldsets
@@ -42,3 +42,10 @@
                 %input{:type => 'radio', :name => 'forms', :id => 'choice'} Choice
               
   #faqs
+
+    .row
+      .span6
+        %h2
+          = "Questions fréquentes"
+          %button#faqs-add.btn.pull-right
+            Ajouter

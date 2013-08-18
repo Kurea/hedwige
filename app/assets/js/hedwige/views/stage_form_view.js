@@ -1,28 +1,43 @@
-define(['backbone', 'template/stage_form'],
-function(Backbone, templateStageForm) {
+define([
+  'backbone', 'hedwige/models/faq',
+  'hedwige/collections/faqs_collection', 'hedwige/views/faqs/collection_view',
+  'template/stage_form'],
+function(
+  Backbone, Faq, FaqsCollection, FaqsCollectionView,
+  templateStageForm) {
 
   var StageFormView = Backbone.View.extend({
+    
     id: 'stage-form',
+
     template: templateStageForm,
+
     partialSelect: '<option value="<%= key %>"><%= title %> (<%= key %>)</option>',
 
     events: {
+      'click #faqs-add': 'clickAddFaq'
     },
 
     initialize: function(options) {
       _.bindAll(this, 'render');
+
       this.stageReferences = this.options.stageReferences;
       this.stageReferences.bind('reset', this.updateStageReferences, this);
       this.stageReferences.fetch();
+
+      this.faqsCollection = new FaqsCollection();
+      this.faqsCollectionView = new FaqsCollectionView({
+        collection: this.faqsCollection
+      });
     },
 
     render: function() {
       this.$el.html(this.template({stageReferences: this.stageReferences}));
+      this.$el.append(this.faqsCollectionView.render().el);
       return this;
     },
 
     updateStageReferences: function() {
-      console.log('StageFormView#updateStageReferences');
       var that = this;
       _.each(this.$el.find('select'), function(select) {
         $(select).append(_.template(that.partialSelect,{key: 'none', title: "Aucune"}));
@@ -31,6 +46,25 @@ function(Backbone, templateStageForm) {
         });
         $(select).chosen();
       });
+    },
+
+    // -----------------
+    // Respond to events
+
+    clickAddFaq: function(event) {
+      this.addFaq();
+      return false; // prevents the event from submitting the form
+    },
+
+    focus: function(itemView) {
+      console.log(itemView);
+    },
+
+    // -----------------
+    // Manage faqs
+
+    addFaq: function() {
+      this.faqsCollection.add({});
     },
 
     save: function() {

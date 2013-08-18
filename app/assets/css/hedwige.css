@@ -30,11 +30,11 @@ fieldset {
   width: 100%;
 }
 
-input, textarea {
+.input-fullwidth {
   display: block;
   width: 100%;
-  padding: 0;
-  border-width: 0
+  box-sizing: border-box;
+  height: 30px; /* corrects height for border-box sizing */
 }
 
 textarea {
@@ -45,4 +45,11 @@ textarea {
   font-size: 2em;
   line-height: 2em;
   height: 2em;
+}
+
+#stage_title {
+}
+
+#faqs-questions {
+  min-height: 200px;
 }
