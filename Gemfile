@@ -1,5 +1,7 @@
 source "http://rubygems.org"
 
+ruby '2.0.0'
+
 gem 'bundler'
 
 gem 'sinatra', :require => "sinatra/base"
@@ -13,7 +15,7 @@ gem 'json'
 gem 'nokogiri'
 
 # MongoDB
-gem 'mongoid'
+gem 'mongoid', '~> 3.0'
 gem 'bson_ext'
 gem 'activesupport'
 
@@ -28,7 +30,7 @@ end
 
 group :development, :test do
   gem 'pry-rails'
-  gem 'pry-debugger'
+  gem 'pry-byebug'
   gem 'pry-stack_explorer'
   gem 'pry-remote'
 	gem 'rspec'
