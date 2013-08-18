@@ -33,8 +33,17 @@ function(Backbone, FaqsView, templateStage) {
       this.model.attributes.prev != undefined ? prevButton.show() : prevButton.hide();
       this.model.attributes.next != undefined ? nextButton.show() : nextButton.hide();
 
-      // Enable/disable next
-      if (this.model.get('forms') != undefined) nextButton.addClass('disabled');
+      if (this.model.get('forms') != undefined) {
+        // Set previous choice
+        var formIdentifier = this.$el.find('form').find('input').attr('name');
+        var choiceIdentifier = this.user.getChoice(formIdentifier);
+        var formInputIdentifier = this.$el.find('#'+choiceIdentifier);
+
+        if (choiceIdentifier != undefined && formInputIdentifier.length > 0 ) formInputIdentifier.attr('checked', true);
+        
+        // Enable/disable next
+        else nextButton.addClass('disabled');
+      }
 
       return this;
     },
