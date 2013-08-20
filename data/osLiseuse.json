@@ -37,19 +37,19 @@
       "label": "La marque de votre liseuse est :",
       "choices": [ {
           "key": "kobo",
-          "text": "Kobo (by Fnac ou non) ? (?)"
+          "text": "Kobo (by Fnac ou non) ? [?](...)"
         }, {
           "key": "bookeen",
-          "text": "Bookeen ? (?)"
+          "text": "Bookeen ? [?](...)"
         }, {
           "key": "sony",
-          "text": "Sony ? (?)"
+          "text": "Sony ? [?](...)"
         }, {
           "key": "barnes",
-          "text": "Barnes & Nobles Nook ? (?)"
+          "text": "Barnes & Nobles Nook ? [?](...)"
         }, {
           "key": "kindle",
-          "text": "Amazon Kindle ? (?)"
+          "text": "Amazon Kindle ? [?](...)"
         }, {
           "key": "autre",
           "text": "Une autre marque ?"
@@ -60,7 +60,7 @@
   "faqs": [
     {
       "question": "Comment savoir dans quelle catégorie entre ma tablette ?",
-      "answer": "En cliquant sur le (?) situé à côté de chaque réponse, vous verrez apparaitre une image qui vous aidera à savoir quel est le système d'exploitation de votre appareil"
+      "answer": "En cliquant sur le [?](...) situé à côté de chaque réponse, vous verrez apparaitre une image qui vous aidera à savoir quel est le système d'exploitation de votre appareil"
     },
     {
       "question": "Pourquoi désirez-vous connaître cette information ?",

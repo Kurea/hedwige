@@ -26,13 +26,13 @@
       "label": "Votre <%= typeAppareil %> est :",
       "choices": [ {
           "key": "android",
-          "text": "un appareil Android ? (?)"
+          "text": "un appareil Android ? [?](![Logo Android](img/Android.png))"
         }, {
           "key": "apple",
-          "text": "un appareil Apple ? (?)"
+          "text": "un appareil Apple ? [?](![Logo Apple](img/Apple.png))"
         }, {
           "key": "windows",
-          "text": "un appareil Windows ? (?)"
+          "text": "un appareil Windows ? [?](![Logo Windows8](img/Windows8.png))"
         }, {
           "key": "autre",
           "text": "un autre type de <%= typeAppareil %>"
@@ -43,7 +43,7 @@
   "faqs": [
     {
       "question": "Comment savoir dans quelle catégorie entre mon appareil ?",
-      "answer": "En cliquant sur le (?) situé à côté de chaque réponse, vous verrez apparaitre une image qui vous aidera à savoir quel est le système d'exploitation de votre appareil"
+      "answer": "En cliquant sur le [?](...) situé à côté de chaque réponse, vous verrez apparaitre une image qui vous aidera à savoir quel est le système d'exploitation de votre appareil"
     },
     {
       "question": "Pourquoi désirez-vous connaître cette information ?",

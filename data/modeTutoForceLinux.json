@@ -1,0 +1,17 @@
+{
+  "key": "modeTutoForceLinux",
+  "prev": "osOrdi",
+  "next": "appliLecture",
+  "title": "Trouvons une autre voie",
+  "text": "Votre système d'exploitation n'est pas compatible avec la lecture de fichier numériques protégés.\nLe logiciel nécessaire à l'ouverture des livres protégés par DRM (Adobe Digital Edition) nécessite un ordinateur équipé de Microsoft Windows XP (SP2), Vista ou 7 ou MAc OS X 10.4.10 ou supérieur.\n Si votre ordinateur dispose de l'un de ces systèmes d'exploitation, cliquez sur étape précédente pour revenir en arrière te choisir ce système. Sinon, cliquez sur étape suivante pour télécharger les livres directement depuis votre appareil.",
+  "faqs": [
+    {
+      "question": "Comment connaître la version de Microsoft Windows installée sur mon ordinateur ?",
+      "answer": "Cliquez sur démarrer > Panneau de configuration > Système La version de Windows s'affiche"
+    },
+    {
+      "question": "Comment connaître la version de Mac OS X installée sur mon ordinateur ?",
+      "answer": "Cliquez sur la pomme en haut à gauche de votre écran puis sur A propos de ce mac. La version de votre système d'exploitation est indiquée dans la fenêtre qui s'ouvre."
+    }
+  ]
+}

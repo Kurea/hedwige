@@ -1,0 +1,17 @@
+{
+  "key": "adobeID",
+  "prev": "osOrdi",
+  "next": "versionOS",
+  "title": "Créons votre compte Adobe",
+  "text": "Nous vous proposons de créer un compte Adobe si vous n'en possédez pas.\nCette étape est facultative si vous souhaitez télécharger les livres directement depuis votre appareil. Toutefois, nous vous conseillons de créer un compte Adobe car il vous permettra d'accéder aux livres protégés achetés depuis 6 teminaux ou ordinateurs et de les retrouver en cas de problème avec votre tablette ou ordinateur.\nPour créer un compte Adobe, rendez-vous à cette adresse depuis votre navigateur internet : [https://www.adobe.com/fr/account/sign-in.adobedotcom.html](https://www.adobe.com/fr/account/sign-in.adobedotcom.html) et cliquez sur \"Vous n'avez pas d'identifiant Adobe ?\". Saisissez le sinformations demandées pour la création du compte puis cliquez sur créer.",
+  "faqs": [
+    {
+      "question": "Je ne souhaite pas créer de compte, puis-je quand même télécharger des livres numériques protégés ?",
+      "answer": "Vous pouvez télécharger des livres numériques protégés sans créer de compte si votre appareil vous y autorise. Toutefois, nous déconseillons cette approche car en cas de problème avec votre appareil, vous ne pourrez pas retrouver les livres que vous avez téléchargé."
+    },
+    {
+      "question": "J'ai des questions sur le compte Adobe, où puis-je trouver des réponses ?",
+      "answer": "Vous pourrez-trouver des réponses à vos questions sur le site d'Abode à cette adresse [http://www.adobe.com/fr/products/digital-editions/faq.html#Content](http://www.adobe.com/fr/products/digital-editions/faq.html#Content)"
+    }
+  ]
+}

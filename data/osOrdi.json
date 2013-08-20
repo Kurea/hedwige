@@ -18,7 +18,18 @@
       }
     },
     {
-      "key": "appliLecture",
+      "key": "modeTutoForceLinux",
+      "conditions": {
+        "predicates": [
+          {
+            "key": "osOrdi",
+            "value": "linux"
+          }
+        ]
+      }
+    },
+    {
+      "key": "modeTutoForceNoOrdi",
       "conditions": {
         "predicates": [
           {
@@ -29,7 +40,7 @@
       }
     },
     {
-      "key": "versionOS"
+      "key": "adobeID"
     }
   ],
   "title": "Parlons de votre ordinateur",
@@ -41,19 +52,19 @@
       "label": "Votre ordinateur urilise :",
       "choices": [ {
           "key": "winVista",
-          "text": "Microsoft Windows Vista ou 7 ? (?)"
+          "text": "Microsoft Windows Vista ou 7 ? [?](![Logo Windows](img/Windows.png))"
         }, {
           "key": "winXP",
-          "text": "une autre version de Microsoft Windows ? (?)"
+          "text": "une autre version de Microsoft Windows ? [?](![Logo Windows](img/Windows.png))"
         }, {
           "key": "MacIntel",
-          "text": "Mac OS X 10.5 ou supérieur (Leopard, Snow Leopard, Lion, Mountain Lion) ? (?)"
+          "text": "Mac OS X 10.5 ou supérieur (Leopard, Snow Leopard, Lion, Mountain Lion) ? [?](![Logo Apple](img/Apple.png))"
         }, {
           "key": "MacPPC",
-          "text": "une version de Mac OS X antérieure ? (?)"
+          "text": "une version de Mac OS X antérieure ? [?](![Logo Apple](img/Apple.png))"
         }, {
           "key": "linux",
-          "text": "Linux (Ubuntu, SUSE, Debian…) ? (?)"
+          "text": "Linux (Ubuntu, SUSE, Debian…) ? [?](![Logo Tux](img/Tux.png))"
         }, {
           "key": "noOrdi",
           "text": "Je n'ai pas d'ordinateur"
@@ -63,12 +74,20 @@
   ],
   "faqs": [
     {
-      "question": "Comment savoir dans quelle catégorie entre mon appareil ?",
-      "answer": "En cliquant sur le (?) situé à côté de chaque réponse, vous verrez apparaitre une image qui vous aidera à savoir quel est le système d'exploitation de votre appareil"
-    },
-    {
       "question": "Pourquoi désirez-vous connaître cette information ?",
       "answer": "Connaître le système d'exploitation de votre appareil nous permet de vous proposer une explication personnalisée pour votre appareil."
+    },
+    {
+      "question": "Comment savoir dans si mon ordinateur utiliser Windows, Mac OS X ou Linux ?",
+      "answer": "En cliquant sur le [?](...) situé à côté de chaque réponse, vous verrez apparaitre une image qui vous aidera à savoir quel est le système d'exploitation de votre appareil"
+    },
+    {
+      "question": "Comment connaître la version de Microsoft Windows installée sur mon ordinateur ?",
+      "answer": "Cliquez sur démarrer > Panneau de configuration > Système La version de Windows s'affiche"
+    },
+    {
+      "question": "Comment connaître la version de Mac OS X installée sur mon ordinateur ?",
+      "answer": "Cliquez sur la pomme en haut à gauche de votre écran puis sur A propos de ce mac. La version de votre système d'exploitation est indiquée dans la fenêtre qui s'ouvre."
     }
   ]
 }

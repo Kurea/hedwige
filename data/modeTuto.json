@@ -18,7 +18,7 @@
     }
   ],
   "title": "Parlons de votre appareil",
-  "text": "Votre appareil permet d'accéder à internet. Nous pouvons donc vous proposer deux modes d'accès différents aux livres numériques protégés :\n\n- via votre ordinateur\n- directement via votre <%= typeAppareil %>",
+  "text": "Votre appareil permet d'accéder à internet. Nous pouvons donc vous proposer deux modes d'accès différents aux livres numériques protégés :",
   "forms": [
     {
       "key": "modeTuto",
@@ -26,10 +26,10 @@
       "label": "Veillez choisir le mode d'accès qui vous correspond le mieux :",
       "choices": [ {
           "key": "ordi",
-          "text": "via mon ordinateur"
+          "text": "via votre ordinateur"
         }, {
           "key": "tablette",
-          "text": "via mon <%= typeAppareil %>"
+          "text": "directement via votre <%= typeAppareil %>"
         }
       ]
     }
