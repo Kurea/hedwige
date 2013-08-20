@@ -40,10 +40,11 @@ function(Backbone, FaqsView, templateStage) {
         var formInputIdentifier = this.$el.find('#'+choiceIdentifier);
 
         if (choiceIdentifier != undefined && formInputIdentifier.length > 0 ) formInputIdentifier.attr('checked', true);
-        
         // Enable/disable next
         else nextButton.addClass('disabled');
       }
+
+      this.$el.find('#tooltip').tooltip();
 
       return this;
     },

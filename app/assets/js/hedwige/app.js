@@ -110,7 +110,13 @@ function(
     },
 
     md2html: function(text) {
-      return this.converter.makeHtml(text);
+      // Cas des tooltips
+      var modifiedText = text.replace(/\[\?\]\(([^()]*|(([\s\S]*)\(([^)]*)\)([^()]*)))\)/g, _.bind(function(match, data) {
+        return "<a href='#' data-html='true' id='tooltip' title='"+this.converter.makeHtml(data)+"' data-placement='right'><i class='icon-question-sign'></i></a>";
+      }, this));
+
+      // cas standard
+      return this.converter.makeHtml(modifiedText);
     }
   });
 
