@@ -20,7 +20,7 @@
             <% if (forms[0].type == "radio") { %>
             <% _.each(forms[0].choices, function(choice) { %>
             %label.radio
-              %input{:type => 'radio', :name => '<%= forms[0].key %>', :id => '<%= choice.key %>'} <%= choice.text %>
+              %input{:type => 'radio', :name => '<%= forms[0].key %>', :id => '<%= choice.key %>'} <%= App.md2html(choice.text) %>
             <% }) %>
             <% } %>
     <% } %>
