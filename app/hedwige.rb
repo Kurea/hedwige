@@ -31,7 +31,8 @@ class Hedwige < Sinatra::Base
       '/css/hedwige-base.css',
       '/css/bootstrap-responsive.css',
       '/css/hedwige.css',
-      '/css/chosen.css'
+      '/css/chosen.css',
+      '/css/cyto.css'
     ]
 
     js :main, [
@@ -50,6 +51,11 @@ class Hedwige < Sinatra::Base
   get '/data/stage_references' do
     content_type :json
     Stage.references.to_json
+  end
+
+  get '/data/stage_tree' do
+    content_type :json
+    Stage.tree.to_json
   end
 
   # JSON data

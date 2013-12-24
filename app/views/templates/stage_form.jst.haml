@@ -2,21 +2,24 @@
   #extra.row
 
     .span12
-      .well
-        %h3 Références de l'étape
-        %fieldset
-          .control-group
-            %label.control-label{for: 'stage_key'} Identifiant
-            .controls
-              %input.input-large{type: 'text', id: 'stage_key', name: 'stage[key]'}
-          .control-group
-            %label.control-label{for: 'stage_previous'} Étape précédente :
-            .controls
-              %select{id: 'stage_previous', name: 'stage[previous]'}
-          .control-group
-            %label.control-label{for: 'stage_next'} Étape suivante :
-            .controls
-              %select{id: 'stage_next', name: 'stage[next]'}
+      %h3 Références de l'étape
+      .row
+        .span6
+          %fieldset
+            .control-group
+              %label.control-label{for: 'stage_key'} Identifiant
+              .controls
+                %input.input-large{type: 'text', id: 'stage_key', name: 'stage[key]'}
+            .control-group
+              %label.control-label{for: 'stage_previous'} Étape précédente :
+              .controls
+                %select{id: 'stage_previous', name: 'stage[previous]'}
+            .control-group
+              %label.control-label{for: 'stage_next'} Étape suivante :
+              .controls
+                %select{id: 'stage_next', name: 'stage[next]'}
+        .span6
+          %a#view-tree.btn Voir l'arbre
 
   #title.row
     .span12
@@ -49,3 +52,12 @@
           = "Questions fréquentes"
           %button#faqs-add.btn.pull-right
             Ajouter
+
+  #modal-tree.modal.hide.fade
+    .modal-header
+      %button{:type => 'button', :class => 'close', :'data-dismiss' => 'modal', :'aria-hidden' => 'true'} &times;
+      %h3 Arbre du tutoriel
+    .modal-body
+      #cy
+    .modal-footer
+      %a.btn{:href => '#', :'data-dismiss' => 'modal', :'aria-hidden' => 'true'} Close
