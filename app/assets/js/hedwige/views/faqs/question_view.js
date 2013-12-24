@@ -9,6 +9,7 @@ function(Marionette, templateFaqsQuestionInput) {
     triggers: {
       'focus input': 'focus',
       'blur input': 'blur',
+      'change input': 'change',
       'click .btn-remove': 'remove'
     }
   });

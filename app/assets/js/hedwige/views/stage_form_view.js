@@ -25,9 +25,11 @@ function(
       this.stageReferences.bind('reset', this.updateStageReferences, this);
       this.stageReferences.fetch();
 
-      this.faqsCollection = new FaqsCollection();
+      this.stage = new Stage();
+
+      this.stage.faqs = new FaqsCollection();
       this.faqsCollectionView = new FaqsCollectionView({
-        collection: this.faqsCollection
+        collection: this.stage.faqs
       });
     },
 
@@ -64,7 +66,7 @@ function(
     // Manage faqs
 
     addFaq: function() {
-      this.faqsCollection.add({});
+      this.stage.faqs.add({});
     },
 
     save: function() {

@@ -33,6 +33,8 @@ fieldset {
 .input-fullwidth {
   display: block;
   width: 100%;
+  -moz-box-sizing:    border-box;
+  -webkit-box-sizing: border-box;
   box-sizing: border-box;
   height: 30px; /* corrects height for border-box sizing */
 }
@@ -52,4 +54,9 @@ textarea {
 
 #faqs-questions {
   min-height: 200px;
+}
+
+.current-faq {
+  border-color: rgba(82, 168, 236, 0.8);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(82, 168, 236, 0.6);
 }
