@@ -1,5 +1,5 @@
 GIT
-  remote: git@github.com:rchampourlier/guard-shotgun.git
+  remote: https://github.com/rchampourlier/guard-shotgun.git
   revision: f7d2e6fb316541bdaf65ad7ee42e71d82d6fbe44
   branch: master
   specs:
