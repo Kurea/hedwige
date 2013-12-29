@@ -97,8 +97,8 @@ function(
               }),
           layout: {
             name: 'breadthfirst',
-            fit: true, // whether to fit to viewport
-            padding: 60 // padding on fit
+            fit: true//, // whether to fit to viewport
+            //padding: 60 // padding on fit
             },
           
           ready: function(){
@@ -154,6 +154,7 @@ function(
 
     save: function() {
       console.log('StageFormView#save');
+      console.log(this)
       var data = {};
       _.each(this.$el.find('[name*=stage]'), function(field) {
         data[field.name] = $(field).val();

@@ -3,7 +3,7 @@ function(Marionette, FaqsQuestionView) {
 
   var FaqsQuestionsView = Marionette.CollectionView.extend({
     id: 'faqs-questions',
-    className: 'span6',
+    className: 'col-md-6',
     itemView: FaqsQuestionView,
 
     initialize: function() {

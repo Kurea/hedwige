@@ -1,38 +1,37 @@
 #title.row
-  .span12
+  .col-md-12
     %h1 <%= title %>
 
 #content.row
 
-  #picture.span6
-    %img{:src => 'http://placehold.it/640x480'}
+  #picture.col-md-6
+    %img.img-responsive{:src => 'http://placehold.it/640x480'}
 
-  #content.span6
+  #content.col-md-6
     #text
       <%= App.md2html(text) %>
     <% if (typeof(forms) != "undefined") { %>
     %form.form-horizontal
       %fieldsets
-        .control-group
-          %label.control-label
-            <%= forms[0].label %>
-          .controls
-            <% if (forms[0].type == "radio") { %>
-            <% _.each(forms[0].choices, function(choice) { %>
-            %label.radio
-              %input{:type => 'radio', :name => '<%= forms[0].key %>', :id => '<%= choice.key %>'} <%= App.md2html(choice.text) %>
-            <% }) %>
-            <% } %>
+        %label.control-label
+          <%= forms[0].label %>
+        <% if (forms[0].type == "radio") { %>
+        <% _.each(forms[0].choices, function(choice) { %>
+        .radio
+          %label
+            %input{:type => 'radio', :name => '<%= forms[0].key %>', :id => '<%= choice.key %>'} <%= App.md2html(choice.text) %>
+        <% }) %>
+        <% } %>
     <% } %>
 
-.row
-  .span12
+#prevnext.row
+  .col-md-12
     .btn-toolbar
-      #button-previous.btn.btn-large.pull-left
-        %i.icon-hand-left
+      #button-previous.btn.btn-default.btn-large.pull-left
+        %i.glyphicon.glyphicon-hand-left
         = "Étape précédente"
       #button-next.btn.btn-large.btn-primary.pull-right
-        %i.icon-hand-right.icon-white
+        %i.glyphicon.glyphicon-hand-right.glyphicon-white
         = "Étape suivante"
 
 #faqs

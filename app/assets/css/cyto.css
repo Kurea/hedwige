@@ -1,8 +1,7 @@
 #cy {
   font: 14px helvetica neue, helvetica, arial, sans-serif;
-  height: 449px;
+  height: 410px;
   width: 560px;
-  position: absolute;
   z-index: 1000;
   left: 0;
   top: 0;
@@ -17,4 +16,8 @@
   z-index: 1001;
   position: relative;
   background-color: white;
+}
+
+#modal-tree {
+  position: absolute;  
 }

@@ -1,13 +1,13 @@
 .row
-  .span12
+  .col-md-12
     %h2= "Questions fréquentes"
 
 .row
-  .span6
-    %ul.nav.nav-list
+  .col-md-6
+    %ul.nav.nav-pills.nav-stacked
       <% _.each(faqs, function(faq, index) { %>
       %li
         %a{:href => '#', :'data-index' => '<%= index %>'} <%= faq.question %>
       <% }) %>
             
-  #faq-answer.span6
+  #faq-answer.col-md-6

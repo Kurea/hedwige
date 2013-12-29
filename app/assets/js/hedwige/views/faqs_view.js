@@ -14,6 +14,8 @@ function(Backbone, templateFaqs) {
     clickedFaq: function(event) {
       this.$el.find('#faq-answer').html(App.md2html(this.attributes.faqs[$(event.target).data('index')].answer));
       this.$el.find('#tooltip').tooltip();
+      $(event.target).parent().parent().find('.active').removeClass('active');
+      $(event.target).parent().addClass('active');
       return false; // Prevent the event from bubbling. We want this because we're clicking an empty link.
     },
 

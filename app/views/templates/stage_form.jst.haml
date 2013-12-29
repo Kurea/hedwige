@@ -1,63 +1,64 @@
 %form.form-horizontal
   #extra.row
 
-    .span12
+    .col-md-12
       %h3 Références de l'étape
-      .row
-        .span6
-          %fieldset
-            .control-group
-              %label.control-label{for: 'stage_key'} Identifiant
-              .controls
-                %input.input-large{type: 'text', id: 'stage_key', name: 'stage[key]'}
-            .control-group
-              %label.control-label{for: 'stage_previous'} Étape précédente :
-              .controls
-                %select{id: 'stage_previous', name: 'stage[previous]'}
-            .control-group
-              %label.control-label{for: 'stage_next'} Étape suivante :
-              .controls
-                %select{id: 'stage_next', name: 'stage[next]'}
-        .span6
-          %a#view-tree.btn Voir l'arbre
+      .col-md-6
+        %fieldset
+          .form-group
+            %label.col-sm-4.control-label{for: 'stage_key'} Identifiant :
+            %fieldset.col-sm-6
+              %input.form-control{type: 'text', id: 'stage_key', name: 'stage[key]'}
+          .form-group
+            %label.col-sm-4.control-label{for: 'stage_previous'} Étape précédente :
+            %select.col-sm-6{id: 'stage_previous', name: 'stage[previous]'}
+          .form-group
+            %label.col-sm-4.control-label{for: 'stage_next'} Étape suivante :
+            %select.col-sm-6{id: 'stage_next', name: 'stage[next]'}
+      .col-md-6
+        %a#view-tree.btn.btn-default 
+          %i.glyphicon.glyphicon-tree-deciduous
+          Voir l'arbre
 
   #title.row
-    .span12
+    .col-md-12
       %fieldset
-        %input.input.input-fullwidth{type: 'text', placeholder: 'Entrez un titre ici', id: 'stage_title', name: 'stage[title]'}
+        .form-group
+          %input.input.form-control.input-fullwidth{type: 'text', placeholder: 'Entrez un titre ici', id: 'stage_title', name: 'stage[title]'}
 
   #content.row
 
-    #picture.span6
-      %img{:src => 'http://placehold.it/640x480'}
+    #picture.col-md-6
+      %img.img-responsive{:src => 'http://placehold.it/640x480'}
 
-    #content.span6
+    #content.col-md-6
       #text
         %fieldset
-          %textarea.input-fullwidth{placeholder: 'Saisissez le texte de votre étape ici', id: 'stage_text', name: 'stage[text]'}
+          %textarea.form-control.input-fullwidth{placeholder: 'Saisissez le texte de votre étape ici', id: 'stage_text', name: 'stage[text]'}
       
       -#%form.form-horizontal
         %fieldsets
-          .control-group
+          .form-group
             %label.control-label
-            .controls
-              %label.radio
-                %input{:type => 'radio', :name => 'forms', :id => 'choice'} Choice
+            %label.radio
+              %input{:type => 'radio', :name => 'forms', :id => 'choice'} Choice
               
   #faqs
 
     .row
-      .span6
+      .col-md-6
         %h2
           = "Questions fréquentes"
-          %button#faqs-add.btn.pull-right
+          %button#faqs-add.btn.btn-default.pull-right
             Ajouter
 
-  #modal-tree.modal.hide.fade
-    .modal-header
-      %button{:type => 'button', :class => 'close', :'data-dismiss' => 'modal', :'aria-hidden' => 'true'} &times;
-      %h3 Arbre du tutoriel
-    .modal-body
-      #cy
-    .modal-footer
-      %a.btn{:href => '#', :'data-dismiss' => 'modal', :'aria-hidden' => 'true'} Close
+  #modal-tree.modal.fade{:'aria-labelledby' => 'MyModalLabel', :'aria-hidden' => 'true', :role => 'dialog', :tabindex => '-1'}
+    .modal-dialog
+      .modal-content
+        .modal-header
+          %button{:type => 'button', :class => 'close', :'data-dismiss' => 'modal', :'aria-hidden' => 'true'} &times;
+          %h3.modal-title{:id => 'MyModalLabel'} Arbre du tutoriel
+        .modal-body
+          #cy
+        .modal-footer
+          %a.btn.btn-default{:href => '#', :'data-dismiss' => 'modal', :'aria-hidden' => 'true'} Close

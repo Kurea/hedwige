@@ -18,6 +18,7 @@ class Hedwige < Sinatra::Base
     serve '/js',     from: 'assets/js'
     serve '/css',    from: 'assets/css'
     serve '/img',    from: 'assets/img'
+    serve '/fonts',  from: 'assets/fonts'
 
     # The second parameter defines where the compressed version will be served.
     # (Note: that parameter is optional, AssetPack will figure it out.)
@@ -29,7 +30,7 @@ class Hedwige < Sinatra::Base
     css :main, [
       '/css/bootstrap.css',
       '/css/hedwige-base.css',
-      '/css/bootstrap-responsive.css',
+      '/css/bootstrap-theme.css',
       '/css/hedwige.css',
       '/css/chosen.css',
       '/css/cyto.css'
