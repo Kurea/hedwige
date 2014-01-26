@@ -13,40 +13,35 @@ function(Marionette, FaqsQuestionsView, templateFaqsCollectionView) {
       var prevFaq
       this.faqsQuestionsView.
         bind('question:focus', function(childView) {
-          console.log('question:focus');
+          // si il n'y avait pas de question selectionnee avant, afficher la zone de réponse
           if (prevFaq == undefined)
           {
             $("[name=answer]").removeClass("hide");
             $("[name=answer]").addClass("input-fullwidth");
           }
-          else
+          else // si il y en avait une, enregistrer la réponse
           {
             prevFaq.model.set('answer', $("[name=answer]").val());
           }
+          // afficher la réponse pour la question courante
           $("[name=answer]").val(childView.model.get('answer'));
-          console.log(childView);
         }).
         bind('question:blur', function(childView) {
-          console.log('question:blur');
-          prevFaq = childView;
-          console.log(childView);
+          prevFaq = childView; // enregistrer la question comme question précédente
         }).
         bind('question:change', function(childView) {
-          console.log('question:change');
+          // enregistrer la question saisie
           childView.model.set('question', childView.$el.find('[name=question]').val());
-          console.log(childView);
         }).bind('question:remove', function(childView) {
-          console.log('question:remove');
-          console.log(childView);
-
+          // si elle était déjà selectionnée ou que c'est la dernière, faire disparaitre le champ de réponse et le vider
           if(childView == prevFaq) {
             $("[name=answer]").val("");
             $("[name=answer]").addClass("hide");
             $("[name=answer]").removeClass("input-fullwidth");
             prevFaq = undefined;
           }
+          // supprimer l'element
           childView.model.collection.remove(childView.model);
-
         }
       );
     },
