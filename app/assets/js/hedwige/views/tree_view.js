@@ -3,16 +3,40 @@ function(Cytoscape) {
 
   var TreeView = Backbone.View.extend({
 
+    // element is a jQuery element
     initialize: function(element) {
       this.element = element;
+      this.build();
+      this.cy = this.element.cytoscape("get");
+      this.updateStyle();
+      this.cy.on('tap', 'node', this.select_node);
+      this.cy.on('tap', this.unfade_nodes);
     },
 
-    // element is a jQuery element
     build: function() {
       this.element.cytoscape({
+
+        layout: {
+          name: 'breadthfirst',
+          fit: true//, // whether to fit to viewport
+          //padding: 60 // padding on fit
+          },
         
-        style: cytoscape.stylesheet()
-          .selector('node')
+        ready: function(){
+          window.cy = this;
+          
+          cy.elements().unselectify();
+          cy.zoomingEnabled(true);
+          cy.panningEnabled(true);
+          cy.boxSelectionEnabled(false);
+        }
+      });
+    },
+
+    updateStyle: function(){
+      this.cy.style()
+        .resetToDefault()
+        .selector('node')
             .css({
               'content': 'data(name)',
               'text-valign': 'center',
@@ -41,47 +65,29 @@ function(Cytoscape) {
             .css({
               'opacity': 0.25,
               'text-opacity': 0
-            }),
+            })
+          .update()
+    },
 
-        layout: {
-          name: 'breadthfirst',
-          fit: true//, // whether to fit to viewport
-          //padding: 60 // padding on fit
-          },
-        
-        ready: function(){
-          console.log('ready');
-          window.cy = this;
-          
-          $.getJSON('/data/stage_tree', function(elements) {
-                      console.log(elements);
-                      window.elements = elements;
-                      cy.load( elements );
-                    });
+    select_node: function(e){
+      var node = e.cyTarget; 
+      var neighborhood = node.neighborhood().add(node);
+      
+      this.cy().elements().addClass('faded');
+      neighborhood.removeClass('faded');      
+    },
 
-          // giddy up...
-          
-          cy.elements().unselectify();
-          cy.zoomingEnabled(true);
-          cy.panningEnabled(true);
-          cy.boxSelectionEnabled(false);
-          
-          cy.on('tap', 'node', function(e){
-            var node = e.cyTarget; 
-            var neighborhood = node.neighborhood().add(node);
-            
-            cy.elements().addClass('faded');
-            neighborhood.removeClass('faded');
+    unfade_nodes: function(e){
+      if( e.cyTarget === this ){
+        this.elements().removeClass('faded');
+      }      
+    },
 
-          });
-          
-          cy.on('tap', function(e){
-            if( e.cyTarget === cy ){
-              cy.elements().removeClass('faded');
-            }
-
-          });
-        }
+    load_data: function() {
+      var cy = this.cy
+      $.getJSON('/data/stage_tree', function(elements) {
+        window.elements = elements;
+        cy.load( elements );
       });
     }
   });

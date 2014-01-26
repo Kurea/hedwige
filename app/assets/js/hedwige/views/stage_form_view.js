@@ -61,7 +61,11 @@ function(
 
     clickViewTree: function(event) {
       $("#modal-tree").removeData('modal');
-      new TreeView($('#cy')).build();
+      if ( this.treeView == undefined )
+      {
+        this.treeView = new TreeView($('#cy'));
+      }
+      this.treeView.load_data();
 
       $("#modal-tree").modal();
 
