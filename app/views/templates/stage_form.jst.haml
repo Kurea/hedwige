@@ -8,13 +8,13 @@
           .form-group
             %label.col-sm-4.control-label{for: 'stage_key'} Identifiant :
             %fieldset.col-sm-6
-              %input.form-control{type: 'text', id: 'stage_key', name: 'stage[key]'}
+              %input.form-control{type: 'text', id: 'stage_key', name: 'key'}
           .form-group
             %label.col-sm-4.control-label{for: 'stage_previous'} Étape précédente :
-            %select.col-sm-6{id: 'stage_previous', name: 'stage[previous]'}
+            %select.col-sm-6{id: 'stage_previous', name: 'previous'}
           .form-group
             %label.col-sm-4.control-label{for: 'stage_next'} Étape suivante :
-            %select.col-sm-6{id: 'stage_next', name: 'stage[next]'}
+            %select.col-sm-6{id: 'stage_next', name: 'next'}
       .col-md-6
         %a#view-tree.btn.btn-default 
           %i.glyphicon.glyphicon-tree-deciduous
@@ -24,7 +24,7 @@
     .col-md-12
       %fieldset
         .form-group
-          %input.input.form-control.input-fullwidth{type: 'text', placeholder: 'Entrez un titre ici', id: 'stage_title', name: 'stage[title]'}
+          %input.input.form-control.input-fullwidth{type: 'text', placeholder: 'Entrez un titre ici', id: 'stage_title', name: 'title'}
 
   #content.row
 
@@ -34,7 +34,7 @@
     #content.col-md-6
       #text
         %fieldset
-          %textarea.form-control.input-fullwidth{placeholder: 'Saisissez le texte de votre étape ici', id: 'stage_text', name: 'stage[text]'}
+          %textarea.form-control.input-fullwidth{placeholder: 'Saisissez le texte de votre étape ici', id: 'stage_text', name: 'text'}
       
       -#%form.form-horizontal
         %fieldsets
