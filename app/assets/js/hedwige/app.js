@@ -3,14 +3,14 @@ define([
   'hedwige/app_router',
   'hedwige/models/user',
   'hedwige/collections/stage_references_collection', 'hedwige/models/stage_reference',
-  'hedwige/models/stage', 'hedwige/views/stage_view', 'hedwige/views/stage_form_view'],
+  'hedwige/models/stage', 'hedwige/views/stage_view', 'hedwige/views/stage_edit_view'],
 
 function(
   Backbone,
   AppRouter,
   User,
   StageReferencesCollection, stageReference,
-  Stage, StageView, StageFormView) {
+  Stage, StageView, StageEditView) {
 
   var App = Backbone.View.extend({
     el: "#app",
@@ -69,7 +69,7 @@ function(
     },
 
     showStageForm: function() {
-      this.renderView(new StageFormView({stageReferences: this.stageReferences, model: this.stage}));
+      this.renderView(new StageEditView({stageReferences: this.stageReferences, model: this.stage}));
 
       // Adjust header's buttons
       this.$el.find('#new-stage').hide();
@@ -130,7 +130,7 @@ function(
     },
 
     save: function(event) {
-      console.log('StageFormView#save');
+      console.log('StageEditView#save');
       console.log(this)
       //var data = {};
       debugger

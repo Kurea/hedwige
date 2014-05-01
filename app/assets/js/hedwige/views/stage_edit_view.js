@@ -7,7 +7,7 @@ function(
   Backbone, Faq, Stage, FaqsCollection, FaqsCollectionView,
   templateStageForm, TreeView) {
 
-  var StageFormView = Backbone.View.extend({
+  var StageEditView = Backbone.View.extend({
     
     id: 'stage-form',
 
@@ -94,5 +94,5 @@ function(
     }
   });
 
-  return StageFormView;
+  return StageEditView;
 });
