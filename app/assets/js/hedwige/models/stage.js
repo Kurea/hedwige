@@ -1,11 +1,22 @@
-define(['backbone'], function(Backbone) {
+define(['backbone', 'hedwige/collections/faqs_collection'], function(Backbone, FaqsCollection) {
 
   var Stage = Backbone.Model.extend({
     urlRoot: '/data/stages',
+    
+    defaults: {
+      "key":  "",
+      "title":     "",
+      "text":    ""
+    },
 
     initialize: function(attributes, options) {
+      
+      this.faqs = new FaqsCollection();
       this.on('change:text', function() {
         this.processTexts(options.user.choices);
+      });
+      this.on('change:faqs', function() {
+        this.faqs = new FaqsCollection(this.get('faqs'));
       });
     },
 

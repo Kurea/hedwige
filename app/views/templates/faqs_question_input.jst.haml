@@ -1,5 +1,5 @@
 .input-group
-  %input.form-control{placeholder: 'Saissez une question fréquente ici', type: 'text', name: 'question'}
+  %input.form-control{placeholder: 'Saissez une question fréquente ici', type: 'text', name: 'question', value: '<%= _.escape(question) %>'}
   .span.input-group-btn
     %button.btn.btn-danger.btn-remove{type: 'button'}
       %i.glyphicon.glyphicon-remove.glyphicon-white

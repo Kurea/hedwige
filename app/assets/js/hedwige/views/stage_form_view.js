@@ -1,7 +1,8 @@
 define([
   'backbone', 'hedwige/models/faq', 'hedwige/models/stage',
   'hedwige/collections/faqs_collection', 'hedwige/views/faqs/collection_view',
-  'template/stage_form', 'hedwige/views/tree_view'],
+  'template/stage_form', 'hedwige/views/tree_view',
+  'chosen.jquery'],
 function(
   Backbone, Faq, Stage, FaqsCollection, FaqsCollectionView,
   templateStageForm, TreeView) {
@@ -26,16 +27,19 @@ function(
       this.stageReferences.bind('reset', this.updateStageReferences, this);
       this.stageReferences.fetch();
 
-      this.stage = new Stage();
+      if (this.model == undefined)
+      {
+        this.model = new Stage();
+      }
 
-      this.stage.faqs = new FaqsCollection();
       this.faqsCollectionView = new FaqsCollectionView({
-        collection: this.stage.faqs
+        collection: this.model.faqs
       });
     },
 
     render: function() {
-      this.$el.html(this.template({stageReferences: this.stageReferences}));
+      //this.$el.html(this.template(_.extend(this.model.toJSON(), {stageReferences: this.stageReferences})));
+      this.$el.html(this.template(this.model.toJSON()));
       this.$el.append(this.faqsCollectionView.render().el);
       return this;
     },
@@ -43,10 +47,15 @@ function(
     updateStageReferences: function() {
       var that = this;
       _.each(this.$el.find('select'), function(select) {
-        $(select).append(_.template(that.partialSelect,{key: 'none', title: "Aucune"}));
+        $(select).append(_.template(that.partialSelect,{key: 'null', title: "Aucune"}));
         that.stageReferences.each(function(stageReference) {
           $(select).append(_.template(that.partialSelect, stageReference.toJSON()));
         });
+
+        valueSelected = that.model.get($(select).attr('name'));
+
+        $(select).find('[value=' + valueSelected +"]").first().attr('selected', true);
+
         $(select).chosen();
       });
     },
@@ -55,6 +64,7 @@ function(
     // Respond to events
 
     clickAddFaq: function(event) {
+      if (event && event.preventDefault){ event.preventDefault(); }
       this.addFaq();
       return false; // prevents the event from submitting the form
     },
@@ -80,16 +90,20 @@ function(
     // Manage faqs
 
     addFaq: function() {
-      this.stage.faqs.add({});
+      this.model.faqs.add({});
     },
 
     save: function() {
       console.log('StageFormView#save');
       console.log(this)
-      var data = {};
+      //var data = {};
+      debugger
+      var data = '{\n' 
       _.each(this.$el.find('[name*=stage]'), function(field) {
-        data[field.name] = $(field).val();
+        //data[field.name] = $(field).val();
+        data += '"'+field.name+'":"'+$(field).val()+'",\n';
       });
+      data += '}'
       console.log(data);
       return data;
     }

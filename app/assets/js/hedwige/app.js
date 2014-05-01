@@ -20,7 +20,9 @@ function(
       "click #button-previous": "gotoPreviousStage",
       "click #button-next":     "gotoNextStage",
       "click #new-stage":       "gotoNewStage",
-      "click #save":            "save"
+      "click #edit-stage":      "gotoEditStage", 
+      "click #cancel":          "gotoStart", 
+      "click #save":            "save",
     },
     
     initialize: function() {
@@ -53,14 +55,26 @@ function(
 
       // Adjust header's buttons
       this.$el.find('#new-stage').show();
+      this.$el.find('#edit-stage').show();
+      this.$el.find('#cancel').hide();
       this.$el.find('#save').hide();
     },
 
+    loadStageForm: function(key) {
+      console.log('App#loadStageForm: ' + key);
+
+      this.stage = new Stage({id: key}, {user: this.user});
+      this.stage.bind('change', this.showStageForm, this);
+      this.stage.fetch();
+    },
+
     showStageForm: function() {
-      this.renderView(new StageFormView({stageReferences: this.stageReferences}));
+      this.renderView(new StageFormView({stageReferences: this.stageReferences, model: this.stage}));
 
       // Adjust header's buttons
       this.$el.find('#new-stage').hide();
+      this.$el.find('#edit-stage').hide();
+      this.$el.find('#cancel').show();
       this.$el.find('#save').show();
     },
 
@@ -101,12 +115,33 @@ function(
     },
     
     gotoNewStage: function(event) {
-      this.router.navigate('new_stage');
-      this.showStageForm();
+      this.stage = new Stage();
+      this.router.navigate('new_stage', {trigger: true});
+    },
+
+    gotoEditStage: function(event) {
+      console.log('App#gotoEditStage: ' + this.stage.get('key'));
+      this.router.navigate(this.stage.get('key')+'/edit');
+      this.showStageForm(this.stage);
+    },
+
+    gotoStart: function() {
+      this.router.navigate('', {trigger: true});
     },
 
     save: function(event) {
-      this.currentView.save();
+      console.log('StageFormView#save');
+      console.log(this)
+      //var data = {};
+      debugger
+      var data = '{\n' 
+      _.each(this.$el.find('[name*=stage]'), function(field) {
+        //data[field.name] = $(field).val();
+        data += '"'+field.name+'":"'+$(field).val()+'",\n';
+      });
+      data += '}'
+      console.log(data);
+      return data;
     },
 
     md2html: function(text) {

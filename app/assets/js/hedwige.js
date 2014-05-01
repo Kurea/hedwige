@@ -1,6 +1,6 @@
 requirejs.config({
   // By default load any module IDs from js
-  baseUrl: 'js/vendor',
+  baseUrl: '/js/vendor',
 
   // except, if the module ID starts with "app",
   // load it from the js/app directory. paths
@@ -31,15 +31,9 @@ requirejs.config({
     },
     'showdown': {
       exports: 'Showdown'
-    }
-  },
-
-  map: {
-    'lib/jquery.custom': {
-      'jquery': 'jquery'
     },
-    '*': {
-      'jquery': 'lib/jquery.custom',
+    'chosen.jquery': {
+      deps: ['jquery']
     }
   }
 });

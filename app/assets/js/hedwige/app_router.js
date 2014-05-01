@@ -2,14 +2,15 @@ define(['backbone'], function(Backbone) {
   var AppRouter = Backbone.Router.extend({
 
     routes: {
-      "new_stage":     "newStage",
+      "new_stage":    "newStage",
+      ":key/edit":    "editStage", 
       "":             "gotoStage",
-      ":key":  "gotoStage"
+      ":key":         "gotoStage"
     },
 
     initialize: function(options) {
       this.app = options.app;
-      _.bindAll(this, 'gotoStage', 'newStage');
+      _.bindAll(this, 'gotoStage', 'newStage', 'editStage');
     },
 
     gotoStage: function(key) {
@@ -24,7 +25,13 @@ define(['backbone'], function(Backbone) {
     newStage: function() {
       console.log('Router#newStage');
       this.app.showStageForm();
+    },
+
+    editStage: function(key) { 
+      console.log('Router#editStage: ' + key);
+      this.app.loadStageForm(key);
     }
+
   });
 
   return AppRouter;
