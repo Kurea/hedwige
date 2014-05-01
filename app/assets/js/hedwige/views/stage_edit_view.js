@@ -1,17 +1,17 @@
 define([
   'backbone', 'hedwige/models/faq', 'hedwige/models/stage',
   'hedwige/collections/faqs_collection', 'hedwige/views/faqs/collection_view',
-  'template/stage_form', 'hedwige/views/tree_view',
+  'template/stage_edit', 'hedwige/views/tree_view',
   'chosen.jquery'],
 function(
   Backbone, Faq, Stage, FaqsCollection, FaqsCollectionView,
-  templateStageForm, TreeView) {
+  templateStageEdit, TreeView) {
 
   var StageEditView = Backbone.View.extend({
     
-    id: 'stage-form',
+    id: 'stage-edit',
 
-    template: templateStageForm,
+    template: templateStageEdit,
 
     partialSelect: '<option value="<%= key %>"><%= title %> (<%= key %>)</option>',
 
