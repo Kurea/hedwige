@@ -91,21 +91,6 @@ function(
 
     addFaq: function() {
       this.model.faqs.add({});
-    },
-
-    save: function() {
-      console.log('StageFormView#save');
-      console.log(this)
-      //var data = {};
-      debugger
-      var data = '{\n' 
-      _.each(this.$el.find('[name*=stage]'), function(field) {
-        //data[field.name] = $(field).val();
-        data += '"'+field.name+'":"'+$(field).val()+'",\n';
-      });
-      data += '}'
-      console.log(data);
-      return data;
     }
   });
 
