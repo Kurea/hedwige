@@ -1,11 +1,13 @@
 define([
-  'backbone', 'hedwige/models/faq', 'hedwige/models/stage',
-  'hedwige/collections/faqs_collection', 'hedwige/views/faqs/collection_view',
-  'template/stage_edit', 'hedwige/views/tree_view',
+  'backbone', 'hedwige/models/stage',
+  'hedwige/views/faqs/collection_view', 
+  'hedwige/collections/stage_references_collection', 
+  'template/stage_edit', 'hedwige/views/tree_view', 'hedwige/views/stage_form_view',
   'chosen.jquery'],
 function(
-  Backbone, Faq, Stage, FaqsCollection, FaqsCollectionView,
-  templateStageEdit, TreeView) {
+  Backbone, Stage, FaqsCollectionView, 
+  StageReferencesCollection,
+  templateStageEdit, TreeView, StageFormView) {
 
   var StageEditView = Backbone.View.extend({
     
@@ -17,13 +19,14 @@ function(
 
     events: {
       'click #faqs-add': 'clickAddFaq',
-      'click #view-tree': 'clickViewTree'      
+      'click #view-tree': 'clickViewTree',
+      'click #activate-form': 'clickActivateForm'      
     },
 
     initialize: function(options) {
       _.bindAll(this, 'render');
 
-      this.stageReferences = this.options.stageReferences;
+      this.stageReferences = new StageReferencesCollection();
       this.stageReferences.bind('reset', this.updateStageReferences, this);
       this.stageReferences.fetch();
 

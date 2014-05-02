@@ -2,14 +2,12 @@ define([
   'backbone',
   'hedwige/app_router',
   'hedwige/models/user',
-  'hedwige/collections/stage_references_collection', 'hedwige/models/stage_reference',
   'hedwige/models/stage', 'hedwige/views/stage_view', 'hedwige/views/stage_edit_view'],
 
 function(
   Backbone,
   AppRouter,
   User,
-  StageReferencesCollection, stageReference,
   Stage, StageView, StageEditView) {
 
   var App = Backbone.View.extend({
@@ -32,8 +30,6 @@ function(
 
       this.router = new AppRouter({app: this});
       this.user = new User();
-      this.stageReferences = new StageReferencesCollection();
-      this.stageReferences.fetch();
 
       this.converter = new Showdown.converter();
 
@@ -69,7 +65,7 @@ function(
     },
 
     showStageForm: function() {
-      this.renderView(new StageEditView({stageReferences: this.stageReferences, model: this.stage}));
+      this.renderView(new StageEditView({model: this.stage}));
 
       // Adjust header's buttons
       this.$el.find('#new-stage').hide();
