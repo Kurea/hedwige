@@ -1,4 +1,5 @@
-define(['backbone', 'hedwige/collections/faqs_collection'], function(Backbone, FaqsCollection) {
+define(['backbone', 'hedwige/collections/faqs_collection', 'hedwige/models/stage_form'],
+  function(Backbone, FaqsCollection, StageForm) {
 
   var Stage = Backbone.Model.extend({
     urlRoot: '/data/stages',
@@ -17,6 +18,9 @@ define(['backbone', 'hedwige/collections/faqs_collection'], function(Backbone, F
       });
       this.on('change:faqs', function() {
         this.faqs = new FaqsCollection(this.get('faqs'));
+      });
+      this.on('change:forms', function() {
+        this.forms = [new StageForm(this.get('forms')[0])];
       });
     },
 
@@ -95,6 +99,15 @@ define(['backbone', 'hedwige/collections/faqs_collection'], function(Backbone, F
       }
 
       }
+    },
+
+    createForm: function() {
+      this.forms = [new StageForm()];
+    },
+
+    removeForm: function() {
+      delete this.forms[0];
+      this.forms = [];
     }
   });
 

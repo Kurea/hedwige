@@ -38,12 +38,20 @@ function(
       this.faqsCollectionView = new FaqsCollectionView({
         collection: this.model.faqs
       });
+
     },
 
     render: function() {
       //this.$el.html(this.template(_.extend(this.model.toJSON(), {stageReferences: this.stageReferences})));
       this.$el.html(this.template(this.model.toJSON()));
       this.$el.append(this.faqsCollectionView.render().el);
+
+      if (this.model.forms != undefined)
+      {
+        this.$el.find('#activate-form').attr('checked', 'true');
+        this.stageFormView = new StageFormView({model: this.model.forms[0]});
+        this.$el.find('#stage-form').html(this.stageFormView.render().el);
+      }
       return this;
     },
 
@@ -57,7 +65,7 @@ function(
 
         valueSelected = that.model.get($(select).attr('name'));
 
-        $(select).find('[value=' + valueSelected +"]").first().attr('selected', true);
+        //$(select).find('[value=' + valueSelected +"]").first().attr('selected', true);
 
         $(select).chosen();
       });
@@ -83,6 +91,23 @@ function(
       $("#modal-tree").modal();
 
       return false; // prevents the event from submitting the form
+    },
+
+    clickActivateForm: function(event) {
+      if ($(event.currentTarget).is(':checked'))
+      {
+        // Afficher l'editeur de formulaire
+        this.model.createForm();
+        this.stageFormView = new StageFormView({model: this.model.forms[0]});
+        this.$el.find('#stage-form').html(this.stageFormView.render().el);
+      }
+      else
+      {
+        // Masquer l'editeur de formulaire
+        this.model.removeForm();
+        this.stageFormView.remove();
+        delete this.stageFormView;
+      }
     },
 
     focus: function(itemView) {

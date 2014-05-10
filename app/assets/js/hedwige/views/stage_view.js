@@ -11,7 +11,6 @@ function(Backbone, FaqsView, templateStage) {
 
     initialize: function(options) {
       _.bindAll(this, 'render');
-
       this.user = this.options['user'];
 
       this.faqsView = new FaqsView({

@@ -41,6 +41,7 @@ fieldset {
 
 textarea {
   min-height: 200px;
+  resize: none;
 }
 
 #title input {
@@ -67,4 +68,13 @@ textarea {
 
 .glyphicon-white {
   color: white;
+}
+
+#form-choice-remove-zone {
+  border-right: 3px solid #000;
+}
+
+#form-choice-remove {
+  margin-top: 25px;
+  margin-bottom: 25px;
 }
