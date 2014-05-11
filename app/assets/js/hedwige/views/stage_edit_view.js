@@ -62,12 +62,25 @@ function(
         that.stageReferences.each(function(stageReference) {
           $(select).append(_.template(that.partialSelect, stageReference.toJSON()));
         });
-
+        debugger
         valueSelected = that.model.get($(select).attr('name'));
+        if ((valueSelected == undefined) || (valueSelected == null))
+        {
+          // si il n'y a pas d'étape précédente, selectionner Aucune
+          // undefined : cas de la création d'une étape
+          // null cas de la permière ou de la dernière étape
+          valueSelected = 'null' 
+        }
+        else if (typeof(valueSelected) != 'string')
+        {
+          // si valueSelected n'est pas une string (cas des structures pour l'étape suivante)
+          // alors, récupérer l'élément par defaut : ici le dernier
+          valueSelected = valueSelected[valueSelected.length-1]['key']
+        }
 
-        //$(select).find('[value=' + valueSelected +"]").first().attr('selected', true);
+        $(select).find('[value=' + valueSelected +"]").first().attr('selected', true);
 
-        $(select).chosen();
+        $(select).chosen({search_contains: true});
       });
     },
 

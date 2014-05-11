@@ -6,7 +6,7 @@ class Stage
   field :title, :type => String
   field :text, :type => String
 
-  field :previous
+  field :prev
   field :next
   
   embeds_many :faqs
