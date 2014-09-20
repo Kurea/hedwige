@@ -3,7 +3,7 @@ function(Marionette, ChoiceView) {
 
   var ChoicesCollectionView = Marionette.CollectionView.extend({
     
-    id: 'choices-collection',
+    //id: 'choices-collection',
     itemView: ChoiceView,
 
     initialize: function() {

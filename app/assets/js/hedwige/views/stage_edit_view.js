@@ -1,11 +1,11 @@
 define([
   'backbone', 'hedwige/models/stage',
-  'hedwige/views/faqs/collection_view', 
+  'hedwige/views/faqs/collection_view', 'hedwige/views/next_stage/collection_view', 
   'hedwige/collections/stage_references_collection', 
   'template/stage_edit', 'hedwige/views/tree_view', 'hedwige/views/stage_form_view',
   'chosen.jquery'],
 function(
-  Backbone, Stage, FaqsCollectionView, 
+  Backbone, Stage, FaqsCollectionView, NextStagesCollectionView,
   StageReferencesCollection,
   templateStageEdit, TreeView, StageFormView) {
 
@@ -20,7 +20,8 @@ function(
     events: {
       'click #faqs-add': 'clickAddFaq',
       'click #view-tree': 'clickViewTree',
-      'click #activate-form': 'clickActivateForm'      
+      'click #activate-form': 'clickActivateForm',
+      'click #add-condition': 'clickAddCondition'      
     },
 
     initialize: function(options) {
@@ -39,10 +40,15 @@ function(
         collection: this.model.faqs
       });
 
+      this.nextStagesCollectionView = new NextStagesCollectionView({
+        collection: this.model.nextStages,
+        stageReferences: this.stageReferences
+      });
+
+
     },
 
     render: function() {
-      //this.$el.html(this.template(_.extend(this.model.toJSON(), {stageReferences: this.stageReferences})));
       this.$el.html(this.template(this.model.toJSON()));
       this.$el.append(this.faqsCollectionView.render().el);
 
@@ -55,33 +61,34 @@ function(
       return this;
     },
 
+    // Mise à jour des menus déroulants permettant de choisir les stages précédents/suivants
     updateStageReferences: function() {
       var that = this;
-      _.each(this.$el.find('select'), function(select) {
-        $(select).append(_.template(that.partialSelect,{key: 'null', title: "Aucune"}));
-        that.stageReferences.each(function(stageReference) {
-          $(select).append(_.template(that.partialSelect, stageReference.toJSON()));
-        });
-        debugger
-        valueSelected = that.model.get($(select).attr('name'));
-        if ((valueSelected == undefined) || (valueSelected == null))
-        {
-          // si il n'y a pas d'étape précédente, selectionner Aucune
-          // undefined : cas de la création d'une étape
-          // null cas de la permière ou de la dernière étape
-          valueSelected = 'null' 
-        }
-        else if (typeof(valueSelected) != 'string')
-        {
-          // si valueSelected n'est pas une string (cas des structures pour l'étape suivante)
-          // alors, récupérer l'élément par defaut : ici le dernier
-          valueSelected = valueSelected[valueSelected.length-1]['key']
-        }
+      var select = this.$el.find('select.#stage_previous').first()
+      select.append(_.template(that.partialSelect,{key: 'null', title: "Aucune"}));
+      that.stageReferences.each(function(stageReference) {
+        select.append(_.template(that.partialSelect, stageReference.toJSON()));
+      });
 
-        $(select).find('[value=' + valueSelected +"]").first().attr('selected', true);
+      // on cherche le previous normalement
+      valueSelected = that.model.get(select.attr('name'));
 
+      if ((valueSelected == undefined) || (valueSelected == null))
+      {
+        // si il n'y a pas d'étape précédente, selectionner Aucune
+        // undefined : cas de la création d'une étape
+        // null cas de la permière ou de la dernière étape
+        valueSelected = 'null';
+      }
+
+      select.find('[value=' + valueSelected +"]").first().attr('selected', true);
+
+      select.chosen({search_contains: true});
+      this.$el.find('#next-stages-collection').html(this.nextStagesCollectionView.render().el);
+      _.each(this.$el.find('select.stage_next'), function(select) {
         $(select).chosen({search_contains: true});
       });
+      this.$el.find('.ns-next-stage-remove-zone').first().removeClass('col-sm-offset-1').removeClass('col-sm-1');
     },
 
     // -----------------
@@ -121,6 +128,14 @@ function(
         this.stageFormView.remove();
         delete this.stageFormView;
       }
+    },
+
+    clickAddCondition: function(event) {
+      if (event && event.preventDefault){ event.preventDefault(); }
+      this.model.nextStages.add({});
+      this.$el.find('select.stage_next').last().chosen({search_contains: true});
+
+      return false;
     },
 
     focus: function(itemView) {

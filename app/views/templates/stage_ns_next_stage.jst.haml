@@ -1,0 +1,12 @@
+.row
+  .col-sm-offset-1.col-sm-1.ns-next-stage-remove-zone
+    %button.ns-next-stage-remove.close{:'aria-hidden' => 'true'} &times;
+  .col-sm-4
+    .form-group
+      %select.col-sm-10{class: 'stage_next', name: 'next'}
+        %option{value: 'null'} Aucune (null)
+        <% stageReferences.each(function(stageReference) { %>
+        %option{value: '<%= stageReference.get("key") %>'} <%= stageReference.get("title") %> (<%= stageReference.get("key") %>)
+        <% }) %>
+.ns-condition
+

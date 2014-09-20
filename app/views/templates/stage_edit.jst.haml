@@ -12,13 +12,16 @@
           .form-group
             %label.col-sm-4.control-label{for: 'stage_previous'} Étape précédente :
             %select.col-sm-6{id: 'stage_previous', name: 'prev'}
-          .form-group
-            %label.col-sm-4.control-label{for: 'stage_next'} Étape suivante :
-            %select.col-sm-6{id: 'stage_next', name: 'next'}
+
       .col-md-6
         %a#view-tree.btn.btn-default 
           %i.glyphicon.glyphicon-tree-deciduous
           Voir l'arbre
+    .col-md-12
+      %label.col-sm-2.control-label{for: 'stage_next'} Étape suivante :
+      #next-stages-collection
+      %button#add-condition.col-sm-offset-2.btn.btn-default
+        Ajouter une condition
 
   #title.row
     .col-md-12

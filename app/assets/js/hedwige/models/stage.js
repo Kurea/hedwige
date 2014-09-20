@@ -1,5 +1,6 @@
-define(['backbone', 'hedwige/collections/faqs_collection', 'hedwige/models/stage_form'],
-  function(Backbone, FaqsCollection, StageForm) {
+define(['backbone', 'hedwige/collections/faqs_collection', 'hedwige/models/stage_form', 
+  'hedwige/collections/next_stages_collection'],
+  function(Backbone, FaqsCollection, StageForm, NextStagesCollection) {
 
   var Stage = Backbone.Model.extend({
     urlRoot: '/data/stages',
@@ -13,6 +14,7 @@ define(['backbone', 'hedwige/collections/faqs_collection', 'hedwige/models/stage
     initialize: function(attributes, options) {
       
       this.faqs = new FaqsCollection();
+      this.nextStages = new NextStagesCollection();
       this.on('change:text', function() {
         this.processTexts(options.user.choices);
       });
@@ -21,6 +23,17 @@ define(['backbone', 'hedwige/collections/faqs_collection', 'hedwige/models/stage
       });
       this.on('change:forms', function() {
         this.forms = [new StageForm(this.get('forms')[0])];
+      });
+      this.on('change:next', function() {
+        if (typeof(this.get('next')) == 'object')
+        {
+          this.nextStages = new NextStagesCollection(this.get('next'));
+        }
+        else
+        {
+          this.nextStages = new NextStagesCollection({'key': this.get('next')});
+          //this.nextStages = this.get('next');
+        }
       });
     },
 
