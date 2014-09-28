@@ -33,6 +33,7 @@ function(
 
       if (this.model == undefined)
       {
+        // only necessary if you access directly to the new stage page 
         this.model = new Stage();
       }
 
@@ -88,7 +89,7 @@ function(
       _.each(this.$el.find('select.stage_next'), function(select) {
         $(select).chosen({search_contains: true});
       });
-      this.$el.find('.ns-next-stage-remove-zone').first().removeClass('col-sm-offset-1').removeClass('col-sm-1');
+      this.$el.find('.ns-next-stage-remove-zone').first().removeClass('col-sm-offset-1');
     },
 
     // -----------------
