@@ -12,12 +12,13 @@ define(['backbone', 'hedwige/collections/faqs_collection', 'hedwige/models/stage
     },
 
     initialize: function(attributes, options) {
-      
       this.faqs = new FaqsCollection();
       this.nextStages = new NextStagesCollection();
-      this.on('change:text', function() {
-        this.processTexts(options.user.choices);
-      });
+      if(options.mode == 'display') {
+        this.on('change:text', function() {
+          this.processTexts(options.user.choices);
+        });
+      }
       this.on('change:faqs', function() {
         this.faqs = new FaqsCollection(this.get('faqs'));
       });
@@ -121,6 +122,26 @@ define(['backbone', 'hedwige/collections/faqs_collection', 'hedwige/models/stage
     removeForm: function() {
       delete this.forms[0];
       this.forms = [];
+    },
+
+    toJSONToSave: function() {
+      var json = Backbone.Model.prototype.toJSON.call(this);
+      if (this.forms != undefined) {
+        var formsJson = _.map(this.forms, function(form){
+          return form.toJSONToSave();
+        });
+        json = _.extend(json, {forms: formsJson});
+      }
+      if (this.nextStages.length > 0) {
+        var nextStagesJson = _.map(this.nextStages.models, function(nextStage){
+          return nextStage.toJSONToSave();
+        });
+        json = _.extend(json, {next: nextStagesJson});
+      }
+      if(this.faqs.length > 0) {
+        json = _.extend(json, {faqs: this.faqs.toJSON()})
+      }
+      return json;
     }
   });
 

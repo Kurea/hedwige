@@ -1,16 +1,18 @@
-define(['backbone.marionette', 'template/stage_ns_next_stage', 'hedwige/views/condition_view', 'chosen.jquery'],
-function(Marionette, templateNsNextStage, ConditionView) {
+define(['hedwige/views/auto_update_item_view', 'template/stage_ns_next_stage', 'hedwige/views/condition_view', 'chosen.jquery'],
+function(AutoUpdateItemView, templateNsNextStage, ConditionView) {
 
-  var NsNextStageView = Marionette.ItemView.extend({
+  var NsNextStageView = AutoUpdateItemView.extend({
 
     className: 'ns-next-stage',
     template: templateNsNextStage,
+    autoUpdateSelector: ':not(.ns-condition)',
 
     triggers: {
       'click .ns-next-stage-remove': "remove"
     },
 
     initialize: function() {
+      AutoUpdateItemView.prototype.initialize.call(this);
       _.bindAll(this, 'render');
       this.conditionView = new ConditionView({
         model: this.model.condition

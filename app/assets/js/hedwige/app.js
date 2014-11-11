@@ -40,7 +40,7 @@ function(
     loadStage: function(key) {
       //console.log('App#loadStage: ' + key);
 
-      this.stage = new Stage({id: key}, {user: this.user});
+      this.stage = new Stage({id: key}, {user: this.user, mode: 'display'});
       this.stage.bind('change', this.showStage, this);
       this.stage.fetch();
     },
@@ -59,12 +59,16 @@ function(
     loadStageForm: function(key) {
       console.log('App#loadStageForm: ' + key);
 
-      this.stage = new Stage({id: key}, {user: this.user});
+      this.stage = new Stage({id: key}, {user: this.user, mode: 'edit'});
       this.stage.bind('change', this.showStageForm, this);
       this.stage.fetch();
     },
 
     showStageForm: function() {
+      if (this.stage == undefined)
+      {
+        this.stage = new Stage({}, {mode: 'edit'});
+      }
       this.renderView(new StageEditView({model: this.stage}));
 
       // Adjust header's buttons
@@ -111,14 +115,13 @@ function(
     },
     
     gotoNewStage: function(event) {
-      this.stage = new Stage();
+      this.stage = new Stage({}, {mode: 'edit'});
       this.router.navigate('new_stage', {trigger: true});
     },
 
     gotoEditStage: function(event) {
       console.log('App#gotoEditStage: ' + this.stage.get('key'));
-      this.router.navigate(this.stage.get('key')+'/edit');
-      this.showStageForm(this.stage);
+      this.router.navigate(this.stage.get('key')+'/edit', {trigger: true});
     },
 
     gotoStart: function() {
@@ -129,13 +132,7 @@ function(
       console.log('StageEditView#save');
       console.log(this)
       //var data = {};
-      debugger
-      var data = '{\n' 
-      _.each(this.$el.find('[name*=stage]'), function(field) {
-        //data[field.name] = $(field).val();
-        data += '"'+field.name+'":"'+$(field).val()+'",\n';
-      });
-      data += '}'
+      var data = this.stage.toJSONToSave();
       console.log(data);
       return data;
     },

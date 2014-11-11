@@ -1,16 +1,17 @@
-define(['backbone.marionette', 'template/stage_form_choice' ],
-function(Marionette, templateFormChoice) {
+define(['hedwige/views/auto_update_item_view', 'template/stage_form_choice' ],
+function(AutoUpdateItemView, templateFormChoice) {
 
-  var FormChoiceView = Marionette.ItemView.extend({
+  var FormChoiceView = AutoUpdateItemView.extend({
 
     className: 'form-choice',
     template: templateFormChoice,
 
     triggers: {
-      'click .form-choice-remove': 'remove'
+      'click .form-choice-remove': 'remove',
     },
 
     initialize: function() {
+      AutoUpdateItemView.prototype.initialize.call(this);
       _.bindAll(this, 'render');
 
     },

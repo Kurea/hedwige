@@ -15,6 +15,15 @@ define(['backbone', 'hedwige/models/condition'], function(Backbone, Condition) {
       {
         this.condition = new Condition();
       }
+    },
+
+    toJSONToSave: function() {
+      var json = Backbone.Model.prototype.toJSON.call(this);
+      if (this.condition.hasPredicates())
+      {
+        json = _.extend(json, {conditions: this.condition.toJSONToSave()});
+      }
+      return json;
     }
 
   });

@@ -23,6 +23,19 @@ define(['backbone', 'hedwige/collections/predicates_collection'],
       {
         this.predicates = new PredicatesCollection();
       }
+    },
+
+    hasPredicates: function() {
+      return this.predicates.length > 0;
+    },
+
+    toJSONToSave: function() {
+      var json = Backbone.Model.prototype.toJSON.call(this);
+      if (this.hasPredicates()) 
+      {
+        json = _.extend(json, {predicates: this.predicates.toJSON()});
+      }
+      return json;
     }
 
   });

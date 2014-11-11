@@ -21,7 +21,11 @@ function(
       'click #faqs-add': 'clickAddFaq',
       'click #view-tree': 'clickViewTree',
       'click #activate-form': 'clickActivateForm',
-      'click #add-condition': 'clickAddCondition'      
+      'click #add-condition': 'clickAddCondition',
+      'change #stage_key': 'updateModel',
+      'change #stage_previous': 'updateModel',
+      'change #stage_title': 'updateModel',
+      'change #stage_text': 'updateModel'     
     },
 
     initialize: function(options) {
@@ -137,6 +141,13 @@ function(
       this.$el.find('select.stage_next').last().chosen({search_contains: true});
 
       return false;
+    },
+
+    updateModel: function(event) {
+      var field = $(event.currentTarget);
+      var value = field.val();
+      var data = field.attr('name');
+      this.model.set(data, value);
     },
 
     focus: function(itemView) {

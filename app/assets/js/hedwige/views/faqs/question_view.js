@@ -1,7 +1,7 @@
-define(['backbone.marionette', 'template/faqs_question_input' ],
-function(Marionette, templateFaqsQuestionInput) {
+define(['hedwige/views/auto_update_item_view', 'template/faqs_question_input' ],
+function(AutoUpdateItemView, templateFaqsQuestionInput) {
 
-  var FaqsQuestionView = Marionette.ItemView.extend({
+  var FaqsQuestionView = AutoUpdateItemView.extend({
 
     className: 'faqs-question',
     template: templateFaqsQuestionInput,
@@ -9,7 +9,7 @@ function(Marionette, templateFaqsQuestionInput) {
     triggers: {
       'focus input': 'focus',
       'blur input': 'blur',
-      'change input': 'change',
+      //'change input': 'change',
       'click .btn-remove': 'remove'
     }
   });

@@ -13,7 +13,9 @@ function(
     template: templateStageForm,
 
     events: {
-      'click #form-choice-add': 'clickAddChoice'
+      'click #form-choice-add': 'clickAddChoice',
+      'change #stage_form_key': 'updateModel',
+      'change #stage_form_label': 'updateModel'
     },
 
     initialize: function(options) {
@@ -34,6 +36,13 @@ function(
       if (event && event.preventDefault){ event.preventDefault(); }
       this.model.choices.add({});
       return false;
+    },
+
+    updateModel: function(event) {
+      var field = $(event.currentTarget);
+      var value = field.val();
+      var data = field.attr('name');
+      this.model.set(data, value);
     }
 
   });

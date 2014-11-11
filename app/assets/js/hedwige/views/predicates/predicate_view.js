@@ -1,7 +1,7 @@
-define(['backbone.marionette', 'template/stage_ns_predicate' ],
-function(Marionette, templateNsPredicate) {
+define(['hedwige/views/auto_update_item_view', 'template/stage_ns_predicate' ],
+function(AutoUpdateItemView, templateNsPredicate) {
 
-  var NsPredicateView = Marionette.ItemView.extend({
+  var NsPredicateView = AutoUpdateItemView.extend({
 
     className: 'ns-predicate',
     template: templateNsPredicate,
@@ -11,6 +11,7 @@ function(Marionette, templateNsPredicate) {
     },
 
     initialize: function() {
+      AutoUpdateItemView.prototype.initialize.call(this);
       _.bindAll(this, 'render');
 
     },
