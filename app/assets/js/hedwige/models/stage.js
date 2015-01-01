@@ -142,6 +142,25 @@ define(['backbone', 'hedwige/collections/faqs_collection', 'hedwige/models/stage
         json = _.extend(json, {faqs: this.faqs.toJSON()})
       }
       return json;
+    },
+
+    validate: function(attrs, options) {
+      debugger
+      error = [];
+      // if we are saving the model
+      //if (options.validate) {
+        if (!attrs.key) {
+          error.push({name: 'key', message: 'An identifier is required'});
+        }
+        if (!attrs.title) {
+          error.push({name: 'title', message: 'A title is required'});
+        }
+        if (!attrs.text) {
+          error.push({name: 'text', message: 'Please describe the step'});
+        }
+      //}
+
+      return error.length > 0 ? error : false;
     }
   });
 
