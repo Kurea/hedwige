@@ -1,4 +1,4 @@
-define(['backbone.marionette', 'hedwige/views/predicates/predicate_view'],
+define(['marionette', 'hedwige/views/predicates/predicate_view'],
 function(Marionette, PredicateView) {
 
   var PredicatesCollectionView = Marionette.CollectionView.extend({

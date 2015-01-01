@@ -1,4 +1,4 @@
-define(['backbone.marionette', 'hedwige/views/faqs/questions_view', 'template/faqs_collection_view'],
+define(['marionette', 'hedwige/views/faqs/questions_view', 'template/faqs_collection_view'],
 function(Marionette, FaqsQuestionsView, templateFaqsCollectionView) {
 
   var FaqsCollectionView = Marionette.View.extend({

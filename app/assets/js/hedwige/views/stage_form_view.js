@@ -2,7 +2,7 @@ define([
   'backbone', 'hedwige/models/stage_form',
   'hedwige/views/choices/collection_view',
   'template/stage_form',
-  'chosen.jquery'],
+  'chosen'],
 function(
   Backbone, StageForm,
   ChoicesCollectionView, 

@@ -1,4 +1,4 @@
-define(['backbone.marionette', 'hedwige/views/choices/choice_view'],
+define(['marionette', 'hedwige/views/choices/choice_view'],
 function(Marionette, ChoiceView) {
 
   var ChoicesCollectionView = Marionette.CollectionView.extend({

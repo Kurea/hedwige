@@ -1,4 +1,4 @@
-define(['hedwige/views/auto_update_item_view', 'template/stage_ns_next_stage', 'hedwige/views/condition_view', 'chosen.jquery'],
+define(['hedwige/views/auto_update_item_view', 'template/stage_ns_next_stage', 'hedwige/views/condition_view', 'chosen'],
 function(AutoUpdateItemView, templateNsNextStage, ConditionView) {
 
   var NsNextStageView = AutoUpdateItemView.extend({
@@ -11,7 +11,8 @@ function(AutoUpdateItemView, templateNsNextStage, ConditionView) {
       'click .ns-next-stage-remove': "remove"
     },
 
-    initialize: function() {
+    initialize: function(options) {
+      this.options = options
       AutoUpdateItemView.prototype.initialize.call(this);
       _.bindAll(this, 'render');
       this.conditionView = new ConditionView({
@@ -24,7 +25,7 @@ function(AutoUpdateItemView, templateNsNextStage, ConditionView) {
         stageReferences: this.options.stageReferences
       });
       this.$el.html(this.template(templateData));
-      this.$el.find('[value=' + this.getValueSelected() +"]").first().attr('selected', true);
+      this.$el.find('[value=' + this.getValueSelected() +"]").first().prop('selected', true);
       this.$el.find('.ns-condition').html(this.conditionView.render().el);
       return this;
     },

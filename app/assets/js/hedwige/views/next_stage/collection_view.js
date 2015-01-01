@@ -1,4 +1,4 @@
-define(['backbone.marionette', 'hedwige/views/next_stage/next_stage_view'],
+define(['marionette', 'hedwige/views/next_stage/next_stage_view'],
 function(Marionette, NextStageView) {
 
   var NextStagesCollectionView = Marionette.CollectionView.extend({

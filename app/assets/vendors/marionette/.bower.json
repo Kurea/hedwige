@@ -1,0 +1,45 @@
+{
+  "name": "backbone.marionette",
+  "description": "Make your Backbone.js apps dance with a composite application architecture!",
+  "url": "http://marionettejs.org",
+  "main": "./lib/backbone.marionette.js",
+  "version": "1.0.0-beta5",
+  "keywords": [
+    "backbone",
+    "framework",
+    "client",
+    "browser",
+    "composite"
+  ],
+  "author": {
+    "name": "Derick Bailey",
+    "email": "derickbailey@gmail.com"
+  },
+  "contributors": [
+    {
+      "name": "Jarrod Overson",
+      "email": "jsoverson@gmail.com"
+    },
+    {
+      "name": "Tony Abou-Assaleh",
+      "email": "taa@eits.ca"
+    },
+    {
+      "name": "Matt Briggs",
+      "email": "matt@mattbriggs.net"
+    }
+  ],
+  "dependencies": {
+    "backbone": "latest"
+  },
+  "homepage": "https://github.com/marionettejs/backbone.marionette",
+  "_release": "1.0.0-beta5",
+  "_resolution": {
+    "type": "version",
+    "tag": "v1.0.0-beta5",
+    "commit": "9d735b7dc821c7d248914e7c7b426e60736ef824"
+  },
+  "_source": "git://github.com/marionettejs/backbone.marionette.git",
+  "_target": "1.0.0-beta5",
+  "_originalSource": "marionette"
+}

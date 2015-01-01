@@ -1,6 +1,6 @@
 requirejs.config({
   // By default load any module IDs from js
-  baseUrl: '/js/vendor',
+  baseUrl: '/vendors',
 
   // except, if the module ID starts with "app",
   // load it from the js/app directory. paths
@@ -10,8 +10,15 @@ requirejs.config({
   paths: {
     hedwige:  '/js/hedwige',
     lib:      '/js/lib',
-    showdown: 'showdown/src/showdown',
-    template: '/jst'
+    showdown: '/js/vendor/showdown/src/showdown',
+    cytoscape: '/js/vendor/cytoscape.js-2.0.2/cytoscape',
+    template: '/jst',
+    backbone: 'backbone/backbone',
+    bootstrap: 'bootstrap/dist/js/bootstrap',
+    chosen: 'chosen/chosen.jquery',
+    jquery: 'jquery/dist/jquery',
+    marionette: 'marionette/lib/backbone.marionette',
+    underscore: 'underscore/underscore'
   },
 
   // to support traditional "browser globals" scripts (jQuery, Underscore, Backbone)
@@ -32,7 +39,15 @@ requirejs.config({
     'showdown': {
       exports: 'Showdown'
     },
-    'chosen.jquery': {
+    'chosen': {
+      //exports: 'chosen.jquery',
+      deps: ['jquery']
+    },
+    'marionette': {
+      exports: 'Marionette',
+      deps: ['backbone']
+    },
+    'cytoscape': {
       deps: ['jquery']
     }
   }
@@ -41,7 +56,9 @@ requirejs.config({
 // Start the main app logic.
 requirejs(
   [ "require.deps!hedwige/app" ],
-
+//require([
+//  'hedwige/app'
+//], 
 function (App) {
   $(function() {
     window.App = new App;

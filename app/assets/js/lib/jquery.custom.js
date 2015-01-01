@@ -1,3 +1,3 @@
-define(['jquery', 'chosen.jquery'], function ($) { 
+define(['jquery', 'chosen'], function ($) { 
   return $; 
 }); 

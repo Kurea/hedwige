@@ -1,4 +1,4 @@
-define(['cytoscape.js-2.0.2/cytoscape'],
+define(['cytoscape'],
 function(Cytoscape) {
 
   var TreeView = Backbone.View.extend({

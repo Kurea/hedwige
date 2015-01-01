@@ -1,4 +1,4 @@
-define(['backbone.marionette', 'template/stage_ns_condition', 'hedwige/views/predicates/collection_view' ],
+define(['marionette', 'template/stage_ns_condition', 'hedwige/views/predicates/collection_view' ],
 function(Marionette, templateNsCondition, PredicatesCollectionView) {
 
   var NsConditionView = Marionette.ItemView.extend({

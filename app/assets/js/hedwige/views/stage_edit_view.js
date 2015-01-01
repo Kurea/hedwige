@@ -3,7 +3,7 @@ define([
   'hedwige/views/faqs/collection_view', 'hedwige/views/next_stage/collection_view', 
   'hedwige/collections/stage_references_collection', 
   'template/stage_edit', 'hedwige/views/tree_view', 'hedwige/views/stage_form_view',
-  'chosen.jquery'],
+  'chosen'],
 function(
   Backbone, Stage, FaqsCollectionView, NextStagesCollectionView,
   StageReferencesCollection,
@@ -59,7 +59,7 @@ function(
 
       if (this.model.forms != undefined)
       {
-        this.$el.find('#activate-form').attr('checked', 'true');
+        this.$el.find('#activate-form').prop('checked', 'true');
         this.stageFormView = new StageFormView({model: this.model.forms[0]});
         this.$el.find('#stage-form').html(this.stageFormView.render().el);
       }
@@ -69,7 +69,7 @@ function(
     // Mise à jour des menus déroulants permettant de choisir les stages précédents/suivants
     updateStageReferences: function() {
       var that = this;
-      var select = this.$el.find('select.#stage_previous').first()
+      var select = this.$el.find('select.stage_previous').first()
       select.append(_.template(that.partialSelect,{key: 'null', title: "Aucune"}));
       that.stageReferences.each(function(stageReference) {
         select.append(_.template(that.partialSelect, stageReference.toJSON()));
@@ -86,7 +86,7 @@ function(
         valueSelected = 'null';
       }
 
-      select.find('[value=' + valueSelected +"]").first().attr('selected', true);
+      select.find('[value=' + valueSelected +"]").first().prop('selected', true);
 
       select.chosen({search_contains: true});
       this.$el.find('#next-stages-collection').html(this.nextStagesCollectionView.render().el);

@@ -1,4 +1,4 @@
-define(['backbone.marionette'],
+define(['marionette'],
 function(Marionette) {
 
   var AutoUpdateItemView = Marionette.ItemView.extend({
