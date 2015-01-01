@@ -32,7 +32,7 @@ function(
       _.bindAll(this, 'render');
 
       this.stageReferences = new StageReferencesCollection();
-      this.stageReferences.bind('reset', this.updateStageReferences, this);
+      this.stageReferences.bind('sync', this.updateStageReferences, this);
       this.stageReferences.fetch();
 
       if (this.model == undefined)
@@ -69,10 +69,10 @@ function(
     // Mise à jour des menus déroulants permettant de choisir les stages précédents/suivants
     updateStageReferences: function() {
       var that = this;
-      var select = this.$el.find('select.stage_previous').first()
-      select.append(_.template(that.partialSelect,{key: 'null', title: "Aucune"}));
+      var select = this.$el.find('select#stage_previous').first()
+      select.append(_.template(that.partialSelect)({key: 'null', title: "Aucune"}));
       that.stageReferences.each(function(stageReference) {
-        select.append(_.template(that.partialSelect, stageReference.toJSON()));
+        select.append(_.template(that.partialSelect)(stageReference.toJSON()));
       });
 
       // on cherche le previous normalement

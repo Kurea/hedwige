@@ -91,16 +91,16 @@ define(['backbone', 'hedwige/collections/faqs_collection', 'hedwige/models/stage
     // Process stage's text without triggering 'change' events.
     processTexts: function(userChoices) {
       // Process text
-      this.attributes.text = _.template(this.get('text'), userChoices);
+      this.attributes.text = _.template(this.get('text'))(userChoices);
 
       // Process forms
       var forms = this.get('forms');
       for (var formIndex in forms) {
         var form = forms[formIndex];
-        form.label = _.template(form.label, userChoices);
+        form.label = _.template(form.label)(userChoices);
         for (var choiceIndex in form.choices) {
           var choice = form.choices[choiceIndex];
-          choice.text = _.template(choice.text, userChoices);
+          choice.text = _.template(choice.text)(userChoices);
         }
         // TODO catch ReferenceError if userChoices does not contain a reference in form.label
 
@@ -108,8 +108,8 @@ define(['backbone', 'hedwige/collections/faqs_collection', 'hedwige/models/stage
       var faqs = this.get('faqs');
       for (var faqIndex in faqs) {
         var faq = faqs[faqIndex];
-        faq.question = _.template(faq.question, userChoices);
-        faq.answer = _.template(faq.answer, userChoices);
+        faq.question = _.template(faq.question)(userChoices);
+        faq.answer = _.template(faq.answer)(userChoices);
       }
 
       }

@@ -4,13 +4,12 @@
 // A single item view implementation that contains code for rendering
 // with underscore.js templates, serializing the view's model or collection,
 // and calling several methods on extended views, such as `onRender`.
-Marionette.ItemView =  Marionette.View.extend({
+Marionette.ItemView = Marionette.View.extend({
+
+  // Setting up the inheritance chain which allows changes to
+  // Marionette.View.prototype.constructor which allows overriding
   constructor: function(){
     Marionette.View.prototype.constructor.apply(this, arguments);
-
-    if (this.initialEvents){
-      this.initialEvents();
-    }
   },
 
   // Serialize the model or collection for the view. If a model is
@@ -48,6 +47,7 @@ Marionette.ItemView =  Marionette.View.extend({
 
     var template = this.getTemplate();
     var html = Marionette.Renderer.render(template, data);
+
     this.$el.html(html);
     this.bindUIElements();
 
@@ -63,7 +63,9 @@ Marionette.ItemView =  Marionette.View.extend({
     if (this.isClosed){ return; }
 
     this.triggerMethod('item:before:close');
+
     Marionette.View.prototype.close.apply(this, arguments);
+
     this.triggerMethod('item:closed');
   }
 });

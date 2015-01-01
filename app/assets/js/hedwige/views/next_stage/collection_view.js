@@ -5,7 +5,8 @@ function(Marionette, NextStageView) {
     
     itemView: NextStageView,
 
-    initialize: function() {
+    initialize: function(options) {
+      this.options = options;
       this.on('itemview:remove', function(childView) {
           // supprimer l'element
           childView.model.collection.remove(childView.model);

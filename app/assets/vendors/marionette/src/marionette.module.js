@@ -3,25 +3,42 @@
 
 // A simple module system, used to create privacy and encapsulation in
 // Marionette applications
-Marionette.Module = function(moduleName, app){
+Marionette.Module = function(moduleName, app, options){
   this.moduleName = moduleName;
+  this.options = _.extend({}, this.options, options);
+  // Allow for a user to overide the initialize
+  // for a given module instance.
+  this.initialize = options.initialize || this.initialize;
 
-  // store sub-modules
+  // Set up an internal store for sub-modules.
   this.submodules = {};
 
   this._setupInitializersAndFinalizers();
 
-  // store the configuration for this module
-  this.config = {};
-  this.config.app = app;
+  // Set an internal reference to the app
+  // within a module.
+  this.app = app;
 
-  // extend this module with an event binder
-  Marionette.addEventBinder(this);
+  // By default modules start with their parents.
+  this.startWithParent = true;
+
+  // Setup a proxy to the trigger method implementation.
+  this.triggerMethod = Marionette.triggerMethod;
+
+  if (_.isFunction(this.initialize)){
+    this.initialize(this.options, moduleName, app);
+  }
 };
 
-// Extend the Module prototype with events / bindTo, so that the module
+Marionette.Module.extend = Marionette.extend;
+
+// Extend the Module prototype with events / listenTo, so that the module
 // can be used as an event aggregator or pub/sub.
 _.extend(Marionette.Module.prototype, Backbone.Events, {
+
+  // Initialize is an empty function by default. Override it with your own
+  // initialization logic when extending Marionette.Module.
+  initialize: function(){},
 
   // Initializer for a specific module. Initializers are run when the
   // module's `start` method is called.
@@ -36,21 +53,26 @@ _.extend(Marionette.Module.prototype, Backbone.Events, {
     this._finalizerCallbacks.add(callback);
   },
 
-  // Start the module, and run all of it's initializers
+  // Start the module, and run all of its initializers
   start: function(options){
-    // Prevent re-start the module
+    // Prevent re-starting a module that is already started
     if (this._isInitialized){ return; }
 
     // start the sub-modules (depth-first hierarchy)
     _.each(this.submodules, function(mod){
-      if (mod.config.options.startWithParent){
+      // check to see if we should start the sub-module with this parent
+      if (mod.startWithParent){
         mod.start(options);
       }
     });
 
     // run the callbacks to "start" the current module
+    this.triggerMethod("before:start", options);
+
     this._initializerCallbacks.run(options, this);
     this._isInitialized = true;
+
+    this.triggerMethod("start", options);
   },
 
   // Stop this module by running its finalizers and then stop all of
@@ -60,16 +82,20 @@ _.extend(Marionette.Module.prototype, Backbone.Events, {
     if (!this._isInitialized){ return; }
     this._isInitialized = false;
 
+    Marionette.triggerMethod.call(this, "before:stop");
+
     // stop the sub-modules; depth-first, to make sure the
     // sub-modules are stopped / finalized before parents
     _.each(this.submodules, function(mod){ mod.stop(); });
 
     // run the finalizers
-    this._finalizerCallbacks.run();
+    this._finalizerCallbacks.run(undefined,this);
 
     // reset the initializers and finalizers
     this._initializerCallbacks.reset();
     this._finalizerCallbacks.reset();
+
+    Marionette.triggerMethod.call(this, "stop");
   },
 
   // Configure the module with a definition function and any custom args
@@ -81,15 +107,16 @@ _.extend(Marionette.Module.prototype, Backbone.Events, {
   // Internal method: run the module definition function with the correct
   // arguments
   _runModuleDefinition: function(definition, customArgs){
+    // If there is no definition short circut the method.
     if (!definition){ return; }
 
     // build the correct list of arguments for the module definition
     var args = _.flatten([
-      this, 
-      this.config.app, 
-      Backbone, 
-      Marionette, 
-      $, _, 
+      this,
+      this.app,
+      Backbone,
+      Marionette,
+      Marionette.$, _,
       customArgs
     ]);
 
@@ -105,85 +132,49 @@ _.extend(Marionette.Module.prototype, Backbone.Events, {
   }
 });
 
-// Function level methods to create modules
+// Type methods to create modules
 _.extend(Marionette.Module, {
 
-  // Create a module, hanging off the app parameter as the parent object. 
+  // Create a module, hanging off the app parameter as the parent object.
   create: function(app, moduleNames, moduleDefinition){
-    var that = this;
-    var parentModule = app;
-    moduleNames = moduleNames.split(".");
+    var module = app;
 
     // get the custom args passed in after the module definition and
     // get rid of the module name and definition function
-    var customArgs = slice.apply(arguments);
+    var customArgs = slice.call(arguments);
     customArgs.splice(0, 3);
 
-    // Loop through all the parts of the module definition
+    // Split the module names and get the number of submodules.
+    // i.e. an example module name of `Doge.Wow.Amaze` would
+    // then have the potential for 3 module definitions.
+    moduleNames = moduleNames.split(".");
     var length = moduleNames.length;
+
+    // store the module definition for the last module in the chain
+    var moduleDefinitions = [];
+    moduleDefinitions[length-1] = moduleDefinition;
+
+    // Loop through all the parts of the module definition
     _.each(moduleNames, function(moduleName, i){
-      var isLastModuleInChain = (i === length-1);
-      var isFirstModuleInChain = (i === 0);
-      var module = that._getModuleDefinition(parentModule, moduleName, app);
-
-      // if this is the last module in the chain, then set up
-      // all of the module options from the configuration
-      if (isLastModuleInChain){
-        module.config.options = that._getModuleOptions(module, parentModule, moduleDefinition);
-
-        // Only add a module definition and initializer when this is the last 
-        // module in a "parent.child.grandchild" hierarchy of module names and
-        // when the module call has a definition function supplied
-        if (module.config.options.hasDefinition){
-          module.addDefinition(module.config.options.definition, customArgs);
-        }
-      }
-
-      // if it's a top level module, and this is the only
-      // module in the chain, then this one gets configured
-      // to start with the parent app.
-      if (isFirstModuleInChain && isLastModuleInChain ){
-        that._configureStartWithApp(app, module);
-      }
-
-      // Reset the parent module so that the next child
-      // in the list will be added to the correct parent
-      parentModule = module;
-    });
+      var parentModule = module;
+      module = this._getModule(parentModule, moduleName, app, moduleDefinition);
+      this._addModuleDefinition(parentModule, module, moduleDefinitions[i], customArgs);
+    }, this);
 
     // Return the last module in the definition chain
-    return parentModule;
+    return module;
   },
 
-  // Only add the initializer if it is set to start with parent (the app), 
-  // and if it has not yet been added
-  _configureStartWithApp: function(app, module){
-    // skip this if we have already configured the module to start w/ the app
-    if (module.config.startWithAppIsConfigured){
-      return;
-    }
-      
-    // start the module when the app starts
-    app.addInitializer(function(options){
-      // but only if the module is configured to start w/ parent
-      if (module.config.options.startWithParent){
-        module.start(options);
-      }
-    });
+  _getModule: function(parentModule, moduleName, app, def, args){
+    var options = _.extend({}, def);
+    var ModuleClass = this.getClass(def);
 
-    // prevent this module from being configured for
-    // auto start again. the first time the module
-    // is defined, determines it's auto-start
-    module.config.startWithAppIsConfigured = true;
-  },
-
-  _getModuleDefinition: function(parentModule, moduleName, app){
     // Get an existing module of this name if we have one
     var module = parentModule[moduleName];
 
-    if (!module){ 
+    if (!module){
       // Create a new module if we don't have one
-      module = new Marionette.Module(moduleName, app);
+      module = new ModuleClass(moduleName, app, options);
       parentModule[moduleName] = module;
       // store the module on the parent
       parentModule.submodules[moduleName] = module;
@@ -192,41 +183,83 @@ _.extend(Marionette.Module, {
     return module;
   },
 
-  _getModuleOptions: function(module, parentModule, moduleDefinition){
-    // default to starting the module with it's parent to whatever the
-    var startWithParent = true;
-    if (module.config.options && !module.config.options.startWithParent){
-      startWithParent = false;
+  // ## Module Classes
+  //
+  // Module classes can be used as an alternative to the define pattern.
+  // The extend function of a Module is identical to the extend functions
+  // on other Backbone and Marionette classes.
+  // This allows module lifecyle events like `onStart` and `onStop` to be called directly.
+  getClass: function(moduleDefinition) {
+    var ModuleClass = Marionette.Module;
+
+    if (!moduleDefinition) {
+      return ModuleClass;
     }
 
-    // set up initial options for the module
-    var options = { 
-      startWithParent: startWithParent,
-      hasDefinition: !!moduleDefinition
-    };
+    // If all of the module's functionality is defined inside its class,
+    // then the class can be passed in directly. `MyApp.module("Foo", FooModule)`.
+    if (moduleDefinition.prototype instanceof ModuleClass) {
+      return moduleDefinition;
+    }
 
-    // short circuit if we don't have a module definition
-    if (!options.hasDefinition){ return options; }
+    return moduleDefinition.moduleClass || ModuleClass;
+  },
 
-    if (_.isFunction(moduleDefinition)){
-      // if the definition is a function, assign it directly
-      // and use the defaults
-      options.definition = moduleDefinition;
+  // Add the module definition and add a startWithParent initializer function.
+  // This is complicated because module definitions are heavily overloaded
+  // and support an anonymous function, module class, or options object
+  _addModuleDefinition: function(parentModule, module, def, args){
+    var fn = this._getDefine(def);
+    var startWithParent = this._getStartWithParent(def, module);
 
-    } else {
+    if (fn){
+      module.addDefinition(fn, args);
+    }
 
-      // the definition is an object. 
+    this._addStartWithParent(parentModule, module, startWithParent);
+  },
 
-      // grab the "define" attribute
-      options.hasDefinition = !!moduleDefinition.define;
-      options.definition = moduleDefinition.define;
-      
-      // grab the "startWithParent" attribute if one exists
-      if (moduleDefinition.hasOwnProperty("startWithParent")){
-        options.startWithParent = moduleDefinition.startWithParent;
+  _getStartWithParent: function(def, module) {
+    var swp;
+
+    if (_.isFunction(def) && (def.prototype instanceof Marionette.Module)) {
+      swp = module.constructor.prototype.startWithParent;
+      return _.isUndefined(swp) ? true : swp;
+    }
+
+    if (_.isObject(def)){
+      swp = def.startWithParent;
+      return _.isUndefined(swp) ? true : swp;
+    }
+
+    return true;
+  },
+
+  _getDefine: function(def) {
+    if (_.isFunction(def) && !(def.prototype instanceof Marionette.Module)) {
+      return def;
+    }
+
+    if (_.isObject(def)){
+      return def.define;
+    }
+
+    return null;
+  },
+
+  _addStartWithParent: function(parentModule, module, startWithParent) {
+    module.startWithParent = module.startWithParent && startWithParent;
+
+    if (!module.startWithParent || !!module.startWithParentIsConfigured){
+      return;
+    }
+
+    module.startWithParentIsConfigured = true;
+
+    parentModule.addInitializer(function(options){
+      if (module.startWithParent){
+        module.start(options);
       }
-    }
-
-    return options;
+    });
   }
 });
