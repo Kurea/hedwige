@@ -3,11 +3,11 @@ function(Marionette, NextStageView) {
 
   var NextStagesCollectionView = Marionette.CollectionView.extend({
     
-    itemView: NextStageView,
+    childView: NextStageView,
 
     initialize: function(options) {
       this.options = options;
-      this.on('itemview:remove', function(childView) {
+      this.on('childview:remove', function(childView) {
           // supprimer l'element
           childView.model.collection.remove(childView.model);
         }
@@ -15,7 +15,7 @@ function(Marionette, NextStageView) {
 
     },
 
-    itemViewOptions: function(model, index) {
+    childViewOptions: function(model, index) {
       return {
         stageReferences: this.options.stageReferences
       }

@@ -150,8 +150,8 @@ function(
       this.model.set(data, value);
     },
 
-    focus: function(itemView) {
-      console.log(itemView);
+    focus: function(childView) {
+      console.log(childView);
     },
 
     // -----------------

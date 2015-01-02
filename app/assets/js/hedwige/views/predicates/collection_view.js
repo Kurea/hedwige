@@ -3,10 +3,10 @@ function(Marionette, PredicateView) {
 
   var PredicatesCollectionView = Marionette.CollectionView.extend({
     
-    itemView: PredicateView,
+    childView: PredicateView,
 
     initialize: function() {
-      this.on('itemview:remove', function(childView) {
+      this.on('childview:remove', function(childView) {
           // supprimer l'element
           childView.model.collection.remove(childView.model);
         }

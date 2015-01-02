@@ -1,3 +1,213 @@
+### v2.3.0 [view commit logs](https://github.com/marionettejs/backbone.marionette/compare/v2.2.2...v2.3.0)
+
+#### 2.3.0 in overview:
+
+This release of Marionette contains a significant amount of code optimizations and refactors. These changes will not be visible to you as end user however as they improve the underlying base of Marionette and speed up your app to improve consistency across the base classes. Such speed ups are most visible in the great work @megawac has been doing in both [serializeData](https://github.com/marionettejs/backbone.marionette/commit/62f15dc7ec880631a0bb79b18470c94b0a0ad086) and [triggerMethod](https://github.com/marionettejs/backbone.marionette/commit/e5957dde9a9a48eeb8097a0ce2f628d795668e64)
+
+As always you can come chat with us in the main chatroom at https://gitter.im/marionettejs/backbone.marionette/
+
+Work has been continuing on improving the documentation of Marionette, via an external custom JSDOC tool that @ChetHarrison has been spear heading via https://github.com/ChetHarrison/jsdoccer
+
+If you have not already checked out Marionette Inspector, it is a great tool that Jason Laster has been working on to make debugging and working with marionette much easier. https://github.com/MarionetteLabs/marionette.inspector
+
+##### Features
+
+* Marionette.isNodeAttached
+  * Determines whether the passed-in node is a child of the `document` or not.
+* View "attach" / onAttach event
+  * Triggered anytime that showing the view in a Region causes it to be attached to the `document`. Like other Marionette events, it also executes a callback method, `onAttach`, if you've specified one.
+* View "before:attach" / onBeforeAttach
+  * This is just like the "attach" event described above, but it's triggered right before the view is attached to the `document`.
+* AppRouter Enhancements
+  * `triggerMethod`, `bindEntityEvents`, and `unbindEntityEvents` are now available on AppRouter
+* Marionette.Application is now a subclass of Marionette.Object
+* Marionette.Behavior is now a subclass of Marionette.Object
+* Marionette.Region is now a subclass of Marionette.Object
+* CompositeView’s `getChildViewContainer` now receives `childView` as a second argument.
+* Region Triggers now pass the view, region instance, and trigger options to all handler methods
+* CollectionView `emptyViewOption` method now receives the model and index as options.
+* Allow non-DOM-backed regions with `allowMissingEl`
+  * `allowMissingEl` option is respected by `_ensureElement`
+  * `_ensureElement` returns a boolean, indicating whether or not element is available
+  * Region#show early-terminates on missing element
+* Regions now ensure the view being shown is valid
+  * Allowing you to handle the error of a region.show without the region killing the currentView and breaking without recourse.
+  * Appending isDestroyed to a Backbone.View on region empty now adds the same safety for not re-showing a removed Backbone view.
+* Marionette is now aliased as Mn on the `window`.
+* Collection/Composite Views now support passing in 'sort' as both a class property and as an option.
+* RegionManager will now auto instantiate regions that are attached to the regionManager instance.
+
+```js
+new Marionette.RegionManager({
+  regions: {
+    "aRegion": "#bar"
+  }
+});
+```
+
+##### Fixes
+
+* Region now uses `$.el.html(‘’)` instead of `.innerHTML` to clear contents.
+  * We can not use `.innerHTML` due to the fact that IE will not let us clear the html of tables and selects. We also do not want to use the more declarative `empty` method that jquery exposes since `.empty` loops over all of the children DOM nodes and unsets the listeners on each node. While this seems like a desirable thing, it comes at quite a high performance cost. For that reason we are simply clearing the html contents of the node.
+* Destroying an old view kept alive by `{preventDestroy: true}` no longer empties its former region.
+  * Now the destroy listener from previous view is removed on region show
+* AppRouter `this.options` now assigned prior to `initialize` being called.
+
+
+##### Deprecation Warnings
+
+* Marionette.Application.addInitializer
+* Marionette.Application Channel
+* Marionette.Application Regions
+* Marionette.Callbacks
+* Marionette.Deferred
+* Marionette.Module.addInitializer
+* Marionette.Module.addFinalizer
+
+
+### v2.2.2 [view commit logs](https://github.com/marionettejs/backbone.marionette/compare/v2.2.1...v2.2.2)
+
+* Fixes
+
+  * Remove duplicate call to region.empty on view destroy.
+  * Fix call time of `swapOut`.
+  * Fix broken link in Marionette Error messages
+
+### v2.2.1 [view commit logs](https://github.com/marionettejs/backbone.marionette/compare/v2.2.0...v2.2.1)
+
+* Fixes
+
+  * Revert collection type checking for `collectionView`.
+
+### v2.2.0 [view commit logs](https://github.com/marionettejs/backbone.marionette/compare/v2.1.0...v2.2.0)
+
+* Features
+
+  * Normalize region selectors hash to allow a user to use the `@ui.` syntax
+  * `Marionette.triggerMethodOn`
+    * `triggerMethodOn` invokes `triggerMethod` on a specific context
+  * Marionette.Error
+    * `captureStackTrace` cleans up stack traces
+  * add view _behaviors reference to associated behaviors
+    * enabling you to easily test and spy on your behaviors
+  * CollectionViews now receive events from emptyViews in the childEvents hash
+  * Regions now receive `swapOut` and `beforeSwapOut` events.
+  * Application has `this.options`
+  * Application has `initialize` method
+  * Behaviors no longer wrap view methods
+
+* Bug Fixes
+
+  * LayoutView’s regions are scoped inside its `el`
+  * Fix inconsistent Marionette.Object constructor implementation.
+  * emptyView instances now proxy their events up to the collection / compositeView
+  * collection / compositeView does not listen to collection add/remove/reset events until after render.
+  * Marionette.normalizeUIKeys no longer mutates UI hash
+
+* Better Errors
+
+  * View destroyed error now includes the view cid in the error message.
+  * Throw an error when Marionette.bindEntityEvents is not an object or function
+  * Throw a descriptive error for `collectionViews`
+    * If you do not pass a valid `collectionView` instance you are now given a logical error.
+
+* Documentation Improvements
+
+  * New API docs are in progress
+  * Examples have been cleaned up
+
+### v2.2.0-pre.2 [view commit logs](https://github.com/marionettejs/backbone.marionette/compare/v2.1.0...v2.2.0-pre.2)
+
+### v2.2.0-pre [view commit logs](https://github.com/marionettejs/backbone.marionette/compare/v2.1.0...v2.2.0-pre)
+
+### v2.1.0 [view commit logs](https://github.com/marionettejs/backbone.marionette/compare/v2.0.3...v2.1.0)
+
+* Features
+
+  * Marionette.Object
+    * A base class which other classes can extend from. Marionette.Object incorporates many Backbone conventions and utilities like `initialize` and `Backbone.Events`. It is a user friendly class to base your classes on to get Backbone conventions on any generic class.
+
+  * Add a `el` reference to the views `el` from within a `behavior` instance.
+
+  * `ItemView`s can now have no template by setting `template: false`
+
+  * Application objects can now configure their default message channel.
+    * This will allow you to configure multiple applications to exist at the same time within an app without their event bus colliding.
+
+  * Application objects now have the `getOption` method.
+
+  * Regions now have a `hasView` method to determine if there is a view within a given region.
+
+  * Views no longer use toJSON directly on models. Instead they call into the new overridable methods `serializeModel` and `serializeCollection` via `serializeData`
+
+  * Return chainable objects from more methods to be consistent
+
+    * Application: emptyRegions
+    * Application: removeRegion
+    * CollectionView renderChildView
+
+    * Controller new
+    * LayoutView destroy
+
+    * Region reset
+    * Region attachView
+    * Region empty
+
+    * RegionManager destroy
+    * RegionManager emptyRegions (now returns regions)
+    * RegionManager removeRegions (now returns regions)
+    * RegionManager removeRegion (now returns region)
+    * View destroy
+    * View undelegateEvents
+    * View delegateEvents
+
+  * RegionManager `addRegions` now accepts a function that returns a region definition in addition to a region definition object
+    * This extends to Marionette.Application’s and CompositeView’s `regions` properties
+
+  * Added CollectionView `resortView`
+    * Override this method on a subclass of CollectionView to provide custom logic for rendering after sorting the collection.
+
+  * View instance is now passed as a third argument to `Marionette.Renderer.render`
+
+  * Add `getRegionManager` to Application
+
+* Fixes
+
+  * CollectionView now maintains proper order when adding a mode
+  * Fix component.js path
+  * Prevent AppRouter from erroring when appRoutes are passed into the router constructor as an option.
+  * UI hash keys now only allow documented syntax, enforcing `@ui.stuff` instead of `@ui<ANY_CHAR>stuff`
+
+### v2.1.0-pre [view commit logs](https://github.com/marionettejs/backbone.marionette/compare/v2.0.3...v2.1.0-pre)
+
+### v2.0.3 [view commit logs](https://github.com/marionettejs/backbone.marionette/compare/v2.0.2...v2.0.3)
+
+  * Bug Fixes
+
+    * Fixed an issue where `before:show` was not triggered on a view's behavior when shown within a region.
+
+    * Destroying a view outside of its region will now cause the region to remove its reference to that view.
+
+### v2.0.2 [view commit logs](https://github.com/marionettejs/backbone.marionette/compare/v2.0.1...v2.0.2)
+
+  * Bug Fixes
+    * Fixed issue where `render:collection` called before the entire collection and children had been rendered.
+
+  * General
+    * Remove bundled main entry point for bower.
+
+### v2.0.1 [view commit logs](https://github.com/marionettejs/backbone.marionette/compare/v2.0.0...v2.0.1)
+  * Fix missing Wreqr and Babysitter in Core AMD definition.
+
+### v2.0.0 [view commit logs](https://github.com/marionettejs/backbone.marionette/compare/v1.8.8...v2.0.0)
+  * This is a breaking release and contains many API updates and changes, thus changelog is quite large for this release, please refer to the [google doc](https://docs.google.com/document/d/1fuXb9N5LwmdPn-teMwAo3c8JTx6ifUowbqFY1NNSdp8/edit#) for the full details of what is new and what has changed.
+
+### v2.0.0-pre.2 [view commit logs](https://github.com/marionettejs/backbone.marionette/compare/v2.0.0-pre.1...v2.0.0-pre.2)
+  * The changelog is quite large for this release, please refer to the [google doc](https://docs.google.com/document/d/1fuXb9N5LwmdPn-teMwAo3c8JTx6ifUowbqFY1NNSdp8/edit#)
+
+### v2.0.0-pre.1 [view commit logs](https://github.com/marionettejs/backbone.marionette/compare/v1.8.5...v2.0.0-pre.1)
+  * The changelog is quite large for this release, please refer to the [google doc](https://docs.google.com/document/d/1fuXb9N5LwmdPn-teMwAo3c8JTx6ifUowbqFY1NNSdp8/edit#)
+
 ### v1.8.8 [view commit logs](https://github.com/marionettejs/backbone.marionette/compare/v1.8.7...v1.8.8)
 
   * Fixes
@@ -69,7 +279,7 @@
     ```js
     myRegion.show(view2, { preventDestroy: true })
     ```
-    * Add  a `getRegion`  method to `Layout`. This is in line with the eventual goal of not attaching regions to the root layout object.
+    * Add a `getRegion` method to `Layout`. This is in line with the eventual goal of not attaching regions to the root layout object.
     * Behavior instances now extend from Backbone.Events, allowing you to use `.listenTo` and `.on`.
 
     * Allow Behaviors to have a functional hash lookup.
@@ -129,7 +339,7 @@ Version 1.7 represents a significant step in formalizing the ways to improve you
 
 * Behaviors
 
-    A `Behavior` is an  isolated set of DOM / user interactions  that can be mixed into any `View`. `Behaviors` allow you to blackbox `View` specific interactions into portable logical chunks, keeping your `views` simple and your code DRY. **[Read the docs here.](https://github.com/marionettejs/backbone.marionette/blob/master/docs/marionette.behavior.md)**
+    A `Behavior` is an isolated set of DOM / user interactions that can be mixed into any `View`. `Behaviors` allow you to blackbox `View` specific interactions into portable logical chunks, keeping your `views` simple and your code DRY. **[Read the docs here.](https://github.com/marionettejs/backbone.marionette/blob/master/docs/marionette.behavior.md)**
 
 * Modules
     * Call stop listening on module stop.
