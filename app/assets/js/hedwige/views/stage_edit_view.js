@@ -63,6 +63,12 @@ function(
         this.stageFormView = new StageFormView({model: this.model.forms[0]});
         this.$el.find('#stage-form').html(this.stageFormView.render().el);
       }
+      this.treeView = new TreeView(this.$el.find('#cy'));
+
+      var that = this
+      this.$el.find("#modal-tree").on('shown.bs.modal', function(){
+        that.treeView.load_data();
+      });
       return this;
     },
 
@@ -107,14 +113,8 @@ function(
 
     clickViewTree: function(event) {
       $("#modal-tree").removeData('modal');
-      if ( this.treeView == undefined )
-      {
-        this.treeView = new TreeView($('#cy'));
-      }
-      this.treeView.load_data();
 
       $("#modal-tree").modal();
-
       return false; // prevents the event from submitting the form
     },
 

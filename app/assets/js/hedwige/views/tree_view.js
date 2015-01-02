@@ -18,6 +18,7 @@ function(Cytoscape) {
 
         layout: {
           name: 'breadthfirst',
+          directed: true,
           fit: true//, // whether to fit to viewport
           //padding: 60 // padding on fit
           },

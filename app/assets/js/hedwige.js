@@ -11,7 +11,7 @@ requirejs.config({
     hedwige:  '/js/hedwige',
     lib:      '/js/lib',
     showdown: '/js/vendor/showdown/src/showdown',
-    cytoscape: '/js/vendor/cytoscape.js-2.0.2/cytoscape',
+    cytoscape: 'cytoscape/dist/cytoscape',
     template: '/jst',
     backbone: 'backbone/backbone',
     bootstrap: 'bootstrap/dist/js/bootstrap',

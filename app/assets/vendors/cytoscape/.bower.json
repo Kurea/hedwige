@@ -1,22 +1,78 @@
 {
-  "name": "cytoscape.js",
-  "version": "2.0.2",
-  "main": "build/cytoscape.js",
-  "ignore": [
-    "**/.*",
-    "node_modules",
-    "bower_components",
-    "test",
-    "tests"
+  "name": "cytoscape",
+  "version": "2.3.7",
+  "license": "LGPL-3.0+",
+  "description": "Graph theory (a.k.a. network) library for analysis and visualisation",
+  "homepage": "http://js.cytoscape.org",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cytoscape/cytoscape.js.git"
+  },
+  "authors": [
+    {
+      "name": "Max Franz",
+      "email": "maxkfranz@gmail.com",
+      "homepage": "http://maxfranz.com"
+    },
+    {
+      "name": "Christian Lopes",
+      "email": "chrtannus@gmail.com"
+    },
+    {
+      "name": "Yue Dong",
+      "email": "oryato@gmail.com"
+    },
+    {
+      "name": "Onur Sumer",
+      "email": "s.onur.sumer@gmail.com"
+    },
+    {
+      "name": "Gerardo Huck",
+      "email": "gerardohuck@gmail.com"
+    },
+    {
+      "name": "Alexandr Truhin (bumbu)",
+      "email": "bmbalex@gmail.com"
+    }
   ],
-  "homepage": "https://github.com/cytoscape/cytoscape.js",
-  "_release": "2.0.2",
+  "keywords": [
+    "graph",
+    "graph-theory",
+    "network",
+    "node",
+    "edge",
+    "vertex",
+    "link",
+    "analysis",
+    "visualisation",
+    "visualization",
+    "requirejs",
+    "amd",
+    "commonjs",
+    "node",
+    "npm",
+    "nodejs",
+    "bower",
+    "jquery"
+  ],
+  "main": "dist/cytoscape.js",
+  "ignore": [
+    "documentation",
+    "src",
+    "test",
+    "debug",
+    "gulpfile.js",
+    "*.sh",
+    "package.json",
+    "README.md"
+  ],
+  "_release": "2.3.7",
   "_resolution": {
     "type": "version",
-    "tag": "v2.0.2",
-    "commit": "f2a2cb49d4cba03e7dcf3d1f2f7d6957b8d5e1d3"
+    "tag": "v2.3.7",
+    "commit": "091969888139008ad6a0d4c051a6979102a37b85"
   },
   "_source": "git://github.com/cytoscape/cytoscape.js.git",
-  "_target": "2.0.2",
+  "_target": "2.3.7",
   "_originalSource": "cytoscape"
 }
